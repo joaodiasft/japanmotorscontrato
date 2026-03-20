@@ -1,12 +1,3 @@
-import { prisma } from '../server/db';
-import { getDefaultSystemSettings } from '../server/seed-data';
-import {
-  toClient,
-  toContract,
-  toSystemSettings,
-  toUser,
-  toVehicle,
-} from '../server/mappers';
 import { jsonResponse, readJsonBody } from './utils';
 import type { Client, Contract, SystemSettings, User, Vehicle } from '../src/types';
 
@@ -35,6 +26,7 @@ export default async function handler(req: any, res: any) {
     // Stats
     if (resource === 'stats') {
       if (req.method !== 'GET') return jsonResponse(res, 405, { error: 'Method not allowed' });
+      const { prisma } = await import('../server/db');
       const contracts = await prisma.contract.findMany();
       const vehicles = await prisma.vehicle.findMany();
       const clients = await prisma.client.findMany();
@@ -58,6 +50,10 @@ export default async function handler(req: any, res: any) {
 
     // Settings
     if (resource === 'settings') {
+      const { prisma } = await import('../server/db');
+      const { toSystemSettings } = await import('../server/mappers');
+      const { getDefaultSystemSettings } = await import('../server/seed-data');
+
       const sub = tail[0];
       if (!sub) {
         if (req.method === 'GET') {
@@ -147,6 +143,9 @@ export default async function handler(req: any, res: any) {
 
     // Vehicles
     if (resource === 'vehicles') {
+      const { prisma } = await import('../server/db');
+      const { toVehicle } = await import('../server/mappers');
+
       const id = maybeId;
       if (!id) {
         if (req.method === 'GET') {
@@ -264,6 +263,9 @@ export default async function handler(req: any, res: any) {
 
     // Clients
     if (resource === 'clients') {
+      const { prisma } = await import('../server/db');
+      const { toClient } = await import('../server/mappers');
+
       const id = maybeId;
       if (!id) {
         if (req.method === 'GET') {
@@ -377,6 +379,9 @@ export default async function handler(req: any, res: any) {
 
     // Contracts
     if (resource === 'contracts') {
+      const { prisma } = await import('../server/db');
+      const { toContract } = await import('../server/mappers');
+
       const id = maybeId;
       if (!id) {
         if (req.method === 'GET') {
@@ -439,6 +444,9 @@ export default async function handler(req: any, res: any) {
 
     // Users
     if (resource === 'users') {
+      const { prisma } = await import('../server/db');
+      const { toUser } = await import('../server/mappers');
+
       const id = maybeId;
       if (!id) {
         if (req.method === 'GET') {
