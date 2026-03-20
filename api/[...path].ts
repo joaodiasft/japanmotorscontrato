@@ -1,4 +1,4 @@
-import { jsonResponse, readJsonBody } from './utils';
+import { jsonResponse, readJsonBody } from './utils.js';
 import type { Client, Contract, SystemSettings, User, Vehicle } from '../src/types';
 
 export default async function handler(req: any, res: any) {
