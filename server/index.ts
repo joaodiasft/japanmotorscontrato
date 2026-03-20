@@ -19,7 +19,7 @@ import {
 import type { Client, Contract, SystemSettings, User, Vehicle } from '../src/types.js';
 
 const app = express();
-const PORT = Number(process.env.API_PORT) || 3001;
+const PORT = Number(process.env.API_PORT) || https://japanmotorscontrato.vercel.app;
 
 app.use(cors({ origin: true, credentials: true }));
 app.use(express.json({ limit: '2mb' }));
