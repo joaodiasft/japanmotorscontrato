@@ -1,22 +1,22 @@
 import 'dotenv/config';
 import cors from 'cors';
 import express from 'express';
-import { prisma } from './db.js';
+import { prisma } from './db';
 import {
   toClient,
   toContract,
   toSystemSettings,
   toUser,
   toVehicle,
-} from './mappers.js';
+} from './mappers';
 import {
   getDefaultSystemSettings,
   seedClients,
   seedContracts,
   seedUsers,
   seedVehicles,
-} from './seed-data.js';
-import type { Client, Contract, SystemSettings, User, Vehicle } from '../src/types.js';
+} from './seed-data';
+import type { Client, Contract, SystemSettings, User, Vehicle } from '../src/types';
 
 const app = express();
 const PORT = Number(process.env.API_PORT) || https://japanmotorscontrato.vercel.app;

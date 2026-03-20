@@ -5,7 +5,7 @@ import type {
   SystemSettings,
   User,
   Vehicle,
-} from '../src/types.js';
+} from '../src/types';
 
 const defaultTemplate: ContractTemplate = {
   id: 'default',

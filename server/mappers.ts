@@ -1,5 +1,5 @@
 import type { Prisma } from '@prisma/client';
-import type { Client, Contract, User, Vehicle, SystemSettings, ContractTemplate } from '../src/types.js';
+import type { Client, Contract, User, Vehicle, SystemSettings, ContractTemplate } from '../src/types';
 
 export function toVehicle(row: {
   id: string;
