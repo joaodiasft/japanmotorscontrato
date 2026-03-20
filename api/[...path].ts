@@ -3,12 +3,18 @@ import type { Client, Contract, SystemSettings, User, Vehicle } from '../src/typ
 
 export default async function handler(req: any, res: any) {
   try {
-    const rawPath = req.query?.path;
-    const segments = Array.isArray(rawPath)
-      ? rawPath.map(String)
-      : rawPath
-        ? String(rawPath).split('/').filter(Boolean)
-        : [];
+    // Vercel não passa sempre `req.query.path` no mesmo formato para catch-all.
+    // Por isso extraímos o pathname diretamente de `req.url` e removemos o prefixo `/api/`.
+    const requestUrl = String(req?.url ?? '');
+    const pathname = requestUrl.startsWith('http')
+      ? new URL(requestUrl).pathname
+      : requestUrl.split('?')[0];
+
+    const withoutApiPrefix = pathname.startsWith('/api/')
+      ? pathname.slice('/api/'.length)
+      : pathname.replace(/^\/+/, '');
+
+    const segments = withoutApiPrefix.split('/').filter(Boolean);
 
     const [resource, maybeId, ...rest] = segments;
     const tail = [maybeId, ...rest].filter(Boolean);
