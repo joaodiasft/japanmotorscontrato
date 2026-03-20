@@ -7,9 +7,9 @@ import type {
   Vehicle,
 } from '../types';
 
-const API_BASE = import.meta.env.VITE_API_BASE
-  ? `${import.meta.env.VITE_API_BASE}/api`
-  : '/api';
+// In Vercel and local dev (with Vite proxy), relative /api is the safest path.
+// This avoids accidental calls to protected preview domains that return HTML.
+const API_BASE = '/api';
 
 async function fetchJson<T>(path: string, init?: RequestInit): Promise<T> {
   const res = await fetch(`${API_BASE}${path}`, {
@@ -24,7 +24,12 @@ async function fetchJson<T>(path: string, init?: RequestInit): Promise<T> {
     throw new Error(text || res.statusText);
   }
   if (res.status === 204) return undefined as T;
-  return res.json() as Promise<T>;
+  const contentType = res.headers.get('content-type') ?? '';
+  const bodyText = await res.text();
+  if (!contentType.includes('application/json')) {
+    throw new Error(`Expected JSON but got ${contentType || 'unknown content type'}`);
+  }
+  return JSON.parse(bodyText) as T;
 }
 
 export const storage = {
