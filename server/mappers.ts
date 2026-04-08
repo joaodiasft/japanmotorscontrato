@@ -213,4 +213,4 @@ export function settingsMissingDefaultTemplateIds(
   return defaultTemplates.some((d) => !storedIds.has(d.id));
 }
 
-export { normalizeContractTemplates } from '../src/utils/contractTemplateHtml';
+export { normalizeContractTemplates } from './contractTemplateHtml';

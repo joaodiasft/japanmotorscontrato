@@ -19,6 +19,9 @@
     "paths": {
       "@/*": [
         "./*"
+      ],
+      "@contract-template-html": [
+        "./server/contractTemplateHtml.ts"
       ]
     },
     "allowImportingTsExtensions": true,

@@ -13,6 +13,8 @@ export default defineConfig(({mode}) => {
     resolve: {
       alias: {
         '@': path.resolve(__dirname, '.'),
+        // Mesmo módulo usado em server/mappers (Vercel); evita duplicar lógica no frontend
+        '@contract-template-html': path.resolve(__dirname, 'server/contractTemplateHtml.ts'),
       },
     },
     server: {
