@@ -1,0 +1,95 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Vehicle {
+  id               String   @id
+  type             String
+  brand            String
+  model            String
+  year             Int
+  color            String
+  plate            String
+  vin              String
+  renavam          String
+  mileage          Int
+  fuel             String
+  acquisitionPrice Float
+  salePrice        Float?
+  status           String
+  images           Json     @default("[]")
+  inspectionNotes  String?
+  createdAt        DateTime @default(now())
+
+  @@map("jm_vehicles")
+}
+
+model Client {
+  id               String   @id
+  name             String
+  status           String
+  birthDate        String
+  gender           String?
+  cpf              String
+  rg               String
+  email            String
+  phone            String
+  whatsapp         String
+  address          Json
+  totalSpent       Float?
+  lastPurchase     String?
+  assignedVehicles Json?
+  notes            String?
+  createdAt        DateTime @default(now())
+
+  @@map("jm_clients")
+}
+
+model Contract {
+  id            String   @id
+  type          String
+  clientId      String
+  vehicleId     String
+  clientName    String
+  vehicleName   String
+  date          String
+  totalValue    Float
+  downPayment   Float
+  balance       Float
+  paymentMethod String
+  warrantyDays  Int
+  clauses       Json     @default("[]")
+  templateId    String?
+  status        String
+  createdAt     DateTime @default(now())
+
+  @@map("jm_contracts")
+}
+
+model User {
+  id        String   @id
+  name      String
+  email     String   @unique
+  role      String
+  avatar    String?
+  createdAt DateTime @default(now())
+
+  @@map("jm_users")
+}
+
+model SystemSettings {
+  id                Int    @id @default(1)
+  companyName       String
+  cnpj              String
+  address           String
+  phone             String
+  email             String
+  contractTemplates Json
+
+  @@map("jm_system_settings")
+}
