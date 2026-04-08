@@ -13,7 +13,18 @@ import { fileURLToPath } from 'node:url';
 const __seedDir = dirname(fileURLToPath(import.meta.url));
 
 function loadContratoVendaTemplateHtml(): string {
-  return readFileSync(join(__seedDir, 'contrato-venda-template.html'), 'utf8');
+  const cwdServer = join(process.cwd(), 'server', 'contrato-venda-template.html');
+  const beside = join(__seedDir, 'contrato-venda-template.html');
+  for (const p of [beside, cwdServer]) {
+    try {
+      return readFileSync(p, 'utf8');
+    } catch {
+      /* tenta próximo path (dev tsx vs Vercel bundle) */
+    }
+  }
+  throw new Error(
+    `contrato-venda-template.html não encontrado. Tentado: ${beside}, ${cwdServer}`,
+  );
 }
 
 const defaultTemplate: ContractTemplate = {

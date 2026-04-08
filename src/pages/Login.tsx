@@ -120,7 +120,7 @@ export default function Login() {
         {/* Footer */}
         <div className="text-center">
           <p className="text-xs text-gray-400 font-medium uppercase tracking-widest">
-            © 2026 Japan Motors • v2.4.0
+            © 2026 Japan Motors • v2.5.0
           </p>
         </div>
       </div>
