@@ -86,6 +86,8 @@ export default function Settings() {
     { label: 'Endereço da Empresa', value: '{{companyAddress}}' },
     { label: 'Telefone da Empresa', value: '{{companyPhone}}' },
     { label: 'Cidade (foro)', value: '{{city}}' },
+    { label: 'Foro (CIDADE - UF maiúsculo)', value: '{{forumFull}}' },
+    { label: 'Linha local e data/hora (cidade, ...)', value: '{{venueDateLine}}' },
     { label: 'Data por extenso', value: '{{date}}' },
     { label: 'Data da venda (dd/mm/aaaa)', value: '{{saleDateShort}}' },
     { label: 'Data e hora (rodapé)', value: '{{contractDateLong}}' },

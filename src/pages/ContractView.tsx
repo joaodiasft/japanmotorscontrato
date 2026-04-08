@@ -182,6 +182,15 @@ export default function ContractView() {
     .join('<br/>');
   const stampDate = new Date(contract.createdAt || contract.date);
 
+  const forumCityMatch = settings.address.match(/-\s*([^,]+?)\s*,\s*([A-Z]{2})\s*$/i);
+  const forumCity =
+    forumCityMatch?.[1]?.trim() ||
+    settings.address.split('-')[1]?.trim()?.split(',')?.[0]?.trim() ||
+    'São Paulo';
+  const forumState = forumCityMatch?.[2]?.trim().toUpperCase() || '';
+  const forumFull = [forumCity, forumState].filter(Boolean).join(' - ').toUpperCase();
+  const venueDateLine = `${forumCity.toUpperCase()}, ${format(stampDate, "dd 'de' MMMM 'de' yyyy 'às' HH:mm 'horas'", { locale: ptBR })}`;
+
   const variableData: Record<string, string> = {
     clientName: client.name,
     clientCpf: client.cpf,
@@ -216,7 +225,9 @@ export default function ContractView() {
     companyCnpj: settings.cnpj,
     companyAddress: settings.address,
     companyPhone: settings.phone ?? '',
-    city: settings.address.split('-')[1]?.trim().split(',')[0] || 'São Paulo',
+    city: forumCity,
+    forumFull,
+    venueDateLine,
     date: format(new Date(contract.date), "dd 'de' MMMM 'de' yyyy", { locale: ptBR }),
     saleDateShort: format(new Date(contract.date), 'dd/MM/yyyy', { locale: ptBR }),
     contractDateLong: format(stampDate, "dd 'de' MMMM 'de' yyyy 'às' HH:mm 'horas'", { locale: ptBR }),
@@ -398,11 +409,14 @@ export default function ContractView() {
         {/* Document Footer */}
         <div className="bg-gray-50 p-8 border-t border-gray-100 flex justify-between items-center text-[10px] text-gray-400 font-medium uppercase tracking-[0.2em] print:hidden">
           <span>Documento gerado eletronicamente via Japan Motors System</span>
-          <span>Página 1 de 1</span>
+          <span>O PDF/impressão pode ter várias páginas (modelo Contrato de Venda)</span>
         </div>
       </motion.div>
 
       <style dangerouslySetInnerHTML={{ __html: `
+        .contract-content .contract-jv-root .cv-brand-logo {
+          filter: invert(1) brightness(0.35) contrast(1.1);
+        }
         @media print {
           html, body {
             background: white !important;
@@ -455,6 +469,10 @@ export default function ContractView() {
           .contract-content .contract-jv-root .jv-page-break {
             break-after: page !important;
             page-break-after: always !important;
+          }
+          /* Logo PNG com fundo preto: inverte para cinza escuro legível no papel branco */
+          .contract-content .contract-jv-root .cv-brand-logo {
+            filter: invert(1) brightness(0.35) contrast(1.1) !important;
           }
           .contract-content .contract-jv-root table {
             page-break-inside: auto;

@@ -6,6 +6,15 @@ import type {
   User,
   Vehicle,
 } from '../src/types';
+import { readFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const __seedDir = dirname(fileURLToPath(import.meta.url));
+
+function loadContratoVendaTemplateHtml(): string {
+  return readFileSync(join(__seedDir, 'contrato-venda-template.html'), 'utf8');
+}
 
 const defaultTemplate: ContractTemplate = {
   id: 'default',
@@ -422,190 +431,11 @@ const modernSaleContractTemplate: ContractTemplate = {
 </div>`,
 };
 
-/** Modelo espelhado no contrato impresso (cabeçalho, seções A–D, cláusulas, garantia, disposições finais e assinaturas). */
+/** Contrato multipágina (4 folhas): contrato-venda-template.html; logo /public/logo-contrato.png */
 const juniorVeiculosSaleContractTemplate: ContractTemplate = {
   id: 'junior-veiculos-venda',
-  name: 'Contrato de Venda (modelo loja — JV)',
-  content: `<div class="contract-jv-root" style="font-family: Arial, Helvetica, sans-serif; color: #111; font-size: 11pt; line-height: 1.45; max-width: 720px; margin: 0 auto;">
-  <header style="display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 20px; border-bottom: 2px solid #c41e3a; padding-bottom: 12px; print-color-adjust: exact; -webkit-print-color-adjust: exact;">
-    <div style="display: flex; align-items: center; gap: 12px;">
-      <div style="width: 48px; height: 48px; border: 2px solid #c41e3a; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 14px; color: #c41e3a; font-family: 'Courier New', monospace;">JV</div>
-      <div>
-        <div style="font-size: 18px; font-weight: 800; color: #c41e3a; letter-spacing: 0.02em; text-transform: uppercase;">{{companyName}}</div>
-        <div style="font-size: 10px; color: #333; margin-top: 2px;">Comércio de Veículos</div>
-      </div>
-    </div>
-    <div style="text-align: right; font-size: 9.5pt; line-height: 1.35;">
-      <div>{{companyAddress}}</div>
-      <div>CNPJ: {{companyCnpj}}</div>
-      <div>Tel.: {{companyPhone}}</div>
-    </div>
-  </header>
-
-  <h1 style="text-align: center; font-size: 15pt; font-weight: bold; margin: 0 0 18px 0; letter-spacing: 0.06em;">CONTRATO DE VENDA</h1>
-
-  <p style="margin: 0 0 10px 0;"><strong>A. VENDEDORA</strong></p>
-  <table class="jv-field-table" style="width: 100%; border-collapse: collapse; font-size: 10.5pt; margin-bottom: 16px; font-family: 'Courier New', Courier, monospace;">
-    <tr><td style="vertical-align: top; width: 140px; padding: 4px 0;">Razão social</td><td style="padding: 4px 0; border-bottom: 1px dotted #333;">{{companyName}}, pessoa jurídica de direito privado</td></tr>
-    <tr><td style="padding: 4px 0;">CNPJ</td><td style="padding: 4px 0; border-bottom: 1px dotted #333;">{{companyCnpj}}</td></tr>
-    <tr><td style="padding: 4px 0;">Endereço</td><td style="padding: 4px 0; border-bottom: 1px dotted #333;">{{companyAddress}}</td></tr>
-    <tr><td style="padding: 4px 0;">Telefone</td><td style="padding: 4px 0; border-bottom: 1px dotted #333;">{{companyPhone}}</td></tr>
-  </table>
-
-  <p style="margin: 0 0 10px 0;"><strong>B. COMPRADOR</strong></p>
-  <table class="jv-field-table" style="width: 100%; border-collapse: collapse; font-size: 10.5pt; margin-bottom: 16px; font-family: 'Courier New', Courier, monospace;">
-    <tr><td style="width: 140px; padding: 4px 0;">Nome</td><td style="padding: 4px 0; border-bottom: 1px dotted #333;">{{clientName}}</td></tr>
-    <tr><td style="padding: 4px 0;">Telefone(s)</td><td style="padding: 4px 0; border-bottom: 1px dotted #333;">{{clientPhone}}</td></tr>
-    <tr><td style="padding: 4px 0;">Endereço</td><td style="padding: 4px 0; border-bottom: 1px dotted #333;">{{clientStreetLine}}</td></tr>
-    <tr><td style="padding: 4px 0;">Bairro</td><td style="padding: 4px 0; border-bottom: 1px dotted #333;">{{clientNeighborhood}}</td></tr>
-    <tr><td style="padding: 4px 0;">Cidade - UF</td><td style="padding: 4px 0; border-bottom: 1px dotted #333;">{{clientCityState}}</td></tr>
-    <tr><td style="padding: 4px 0;">CEP</td><td style="padding: 4px 0; border-bottom: 1px dotted #333;">{{clientZipCode}}</td></tr>
-    <tr><td style="padding: 4px 0;">Identidade</td><td style="padding: 4px 0; border-bottom: 1px dotted #333;">{{clientRg}}</td></tr>
-    <tr><td style="padding: 4px 0;">CPF</td><td style="padding: 4px 0; border-bottom: 1px dotted #333;">{{clientCpf}}</td></tr>
-  </table>
-
-  <p style="margin: 0 0 10px 0;"><strong>C. OBJETO DO CONTRATO</strong> <span style="font-weight: normal;">(veículo usado)</span></p>
-  <table class="jv-field-table" style="width: 100%; border-collapse: collapse; font-size: 10.5pt; margin-bottom: 16px; font-family: 'Courier New', Courier, monospace;">
-    <tr><td style="width: 140px; padding: 4px 0;">Veículo</td><td style="padding: 4px 0; border-bottom: 1px dotted #333;">{{vehicleBrand}} {{vehicleModel}}</td></tr>
-    <tr><td style="padding: 4px 0;">Cor</td><td style="padding: 4px 0; border-bottom: 1px dotted #333;">{{vehicleColor}}</td></tr>
-    <tr><td style="padding: 4px 0;">Combustível</td><td style="padding: 4px 0; border-bottom: 1px dotted #333;">{{vehicleFuel}}</td></tr>
-    <tr><td style="padding: 4px 0;">Placa</td><td style="padding: 4px 0; border-bottom: 1px dotted #333;">{{vehiclePlate}}</td></tr>
-    <tr><td style="padding: 4px 0;">Chassi</td><td style="padding: 4px 0; border-bottom: 1px dotted #333;">{{vehicleVin}}</td></tr>
-    <tr><td style="padding: 4px 0;">Renavam</td><td style="padding: 4px 0; border-bottom: 1px dotted #333;">{{vehicleRenavam}}</td></tr>
-    <tr><td style="padding: 4px 0;">Ano Fab. / Mod.</td><td style="padding: 4px 0; border-bottom: 1px dotted #333;">{{vehicleYearFabMod}}</td></tr>
-    <tr><td style="padding: 4px 0;">Quilometragem</td><td style="padding: 4px 0; border-bottom: 1px dotted #333;">{{vehicleMileage}} km</td></tr>
-    <tr><td style="padding: 4px 0;">Data da venda</td><td style="padding: 4px 0; border-bottom: 1px dotted #333;">{{saleDateShort}}</td></tr>
-  </table>
-
-  <p style="margin: 0 0 10px 0;"><strong>D. PREÇO E CONDIÇÕES DE VENDA</strong></p>
-  <table class="jv-field-table" style="width: 100%; border-collapse: collapse; font-size: 10.5pt; border: 1px solid #333; margin-bottom: 16px; font-family: 'Courier New', Courier, monospace;">
-    <thead>
-      <tr style="background: #f3f3f3;">
-        <th style="border: 1px solid #333; padding: 6px; text-align: left;">Tipo pagamento</th>
-        <th style="border: 1px solid #333; padding: 6px; text-align: right; width: 110px;">Valor R$</th>
-        <th style="border: 1px solid #333; padding: 6px; text-align: left;">Histórico / detalhes</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td style="border: 1px solid #333; padding: 6px;">DINHEIRO</td>
-        <td style="border: 1px solid #333; padding: 6px; text-align: right;">{{cashValue}}</td>
-        <td style="border: 1px solid #333; padding: 6px;">—</td>
-      </tr>
-      <tr>
-        <td style="border: 1px solid #333; padding: 6px;">FINANCIAMENTO</td>
-        <td style="border: 1px solid #333; padding: 6px; text-align: right;">{{financingValue}}</td>
-        <td style="border: 1px solid #333; padding: 6px; font-size: 9.5pt;">{{paymentMethod}}</td>
-      </tr>
-      <tr>
-        <td style="border: 1px solid #333; padding: 6px; font-weight: bold;">TOTAL</td>
-        <td style="border: 1px solid #333; padding: 6px; text-align: right; font-weight: bold;">{{totalValue}}</td>
-        <td style="border: 1px solid #333; padding: 6px;">Ref.: {{totalValueWords}}</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <div style="font-size: 10.5pt; text-align: justify;">
-    <p><strong>1.</strong> Na hipótese de o COMPRADOR utilizar veículo de menor valor nas partes pagas do negócio (troca), declara sob as penas da lei ser o único e exclusivo responsável por qualquer questão de natureza civil ou criminal relacionada àquele bem, isentando a VENDEDORA.</p>
-    <p><strong>2.</strong> O COMPRADOR declara ter vistoriado o veículo, aceitando-o no estado em que se encontra (<em>ad corpus</em>), sem garantia de vícios ocultos quanto à mecânica geral, elétrica, lataria e pintura, exceto quanto à garantia legal/contratual expressamente indicada neste instrumento. A VENDEDORA não se responsabiliza por eventual evidência de descompasso do hodômetro em relação à quilometragem real, quando referente a proprietários anteriores.</p>
-    <p><strong>3.</strong> Taxa de transferência combinada: <strong>R$ 1.500,00</strong> (mil e quinhentos reais). Na hipótese de financiamento, poderá haver cobrança de T.A.C. (taxa de abertura de crédito) no valor aproximado de <strong>R$ 2.000,00</strong> (dois mil reais), conforme instituição financeira e proposta aprovada.</p>
-    <p style="margin-bottom: 6px;"><strong>* DAS CONDIÇÕES DA GARANTIA</strong> — Nos termos a seguir (prazo de <strong>{{warrantyDays}} dias</strong> a contar da entrega, quando aplicável ao modelo adotado pela loja).</p>
-  </div>
-
-  <div class="jv-page-break" style="break-after: page; page-break-after: always;"></div>
-
-  <header style="display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 16px;">
-    <div style="font-weight: 800; color: #c41e3a; text-transform: uppercase; font-size: 12pt;">{{companyName}}</div>
-    <div style="text-align: right; font-size: 9.5pt;">
-      <div>{{companyAddress}}</div>
-      <div>CNPJ: {{companyCnpj}}</div>
-    </div>
-  </header>
-
-  <h2 style="font-size: 12pt; text-align: center; margin: 0 0 14px 0;">GARANTIA</h2>
-  <div style="font-size: 10.5pt; text-align: justify;">
-    <p>O COMPRADOR declara ciência de que a garantia concedida pela VENDEDORA é de <strong>{{warrantyDays}} dias</strong>, limitada exclusivamente a <strong>MOTOR e CAIXA DE CÂMBIO</strong>, nas condições abaixo:</p>
-    <ul style="margin: 8px 0; padding-left: 20px;">
-      <li>Cobre apenas defeitos de fabricação/ocultos desses conjuntos, não abrangendo desgaste natural de demais itens.</li>
-      <li>Os reparos deverão ser realizados em oficina autorizada, com apresentação de orçamento prévio à VENDEDORA para aprovação.</li>
-      <li>O prazo conta-se a partir da data de entrega do veículo.</li>
-      <li>A VENDEDORA poderá conferir a quilometragem e apurar indícios de fraude ou mau uso.</li>
-      <li>As peças substituídas em garantia poderão ficar retidas pela VENDEDORA.</li>
-      <li>A substituição de motor ou câmbio somente será considerada quando a impossibilidade técnica de reparo for comprovada.</li>
-    </ul>
-
-    <p style="margin-top: 14px;"><strong>São condições indispensáveis e obrigatórias para efetivação da garantia:</strong></p>
-    <ul style="margin: 8px 0; padding-left: 20px;">
-      <li>Comunicação direta à VENDEDORA, na sede indicada neste contrato.</li>
-      <li>Defeitos que não decorram de desgaste de componentes anteriores à data da venda, na forma da análise técnica.</li>
-      <li>Inexistência de desuso prolongado, uso inadequado, acidentes ou caso fortuito/força maior como causa do defeito.</li>
-      <li>Cumprimento das recomendações de uso e manutenção do manual do fabricante.</li>
-    </ul>
-
-    <p style="margin-top: 14px;"><strong>G.1 — DA NÃO COBERTURA DA GARANTIA</strong></p>
-    <p>A partir da entrega do veículo, o COMPRADOR assume integralmente multas, tributos e responsabilidades de trânsito. Não integram a garantia, entre outros: anéis sincronizadores; discos e pastilhas de freio; velas e bobinas; kit de embreagem e volante do motor; bicos/injeção eletrônica; sensores; retentores e juntas; correias e rolamentos; bateria; alternador e motor de partida; bomba de combustível; elevadores de vidro; itens de suspensão (amortecedores, buchas, pivôs, terminais); direção; arrefecimento (radiador, mangueiras, válvula termostática); estofamento e acabamentos internos; fluidos, lubrificantes, filtros, lâmpadas, consumíveis e itens de borracha/plástico em geral; alarmes, conversões de gás, air bags, sistemas de multimídia/GPS, vazamentos diversos e ruídos não caracterizados como defeito de motor/câmbio.</p>
-  </div>
-
-  <div class="jv-page-break" style="break-after: page; page-break-after: always;"></div>
-
-  <header style="display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 16px;">
-    <div style="font-weight: 800; color: #c41e3a; text-transform: uppercase; font-size: 12pt;">{{companyName}}</div>
-    <div style="text-align: right; font-size: 9.5pt;">
-      <div>{{companyAddress}}</div>
-      <div>CNPJ: {{companyCnpj}}</div>
-    </div>
-  </header>
-
-  <div style="font-size: 10.5pt; text-align: justify;">
-    <p><strong>G.2</strong> — A presente garantia se restringe ao veículo e suas peças de motor e caixa de câmbio, não cobrindo quaisquer outras repercussões, mesmo quando decorrentes de avaria ou defeitos no veículo, tais como: <strong>1.</strong> Despesas de transportes. <strong>2.</strong> Imobilização do veículo. <strong>3.</strong> Hospedagem. <strong>4.</strong> Socorro de guincho. <strong>5.</strong> Pelo decurso de validade. <strong>6.</strong> Quando forem executadas alterações ou modificações no veículo ou qualquer de seus componentes, por oficina mecânica diversa da indicada pela VENDEDORA. <strong>7.</strong> Quando ocorrer danos decorrentes de mau uso comprovado ou falta de manutenção adequada. <strong>8.</strong> Não há garantia de pintura. <strong>9.</strong> Para fins de comprovação o cliente declara ter vistoriado a pintura do veículo mencionado neste contrato, atestando que a mesma se encontra em boas condições, considerando-se a particularidade de não se tratar de veículo novo.</p>
-
-    <p><strong>H</strong> — A título de penalidade contratual por arrependimento, fica pactuada uma multa de <strong>10% (dez por cento)</strong>, calculada sobre o valor do presente contrato, a qual será devida pela parte que der causa à sua rescisão, convertida em benefício da parte inocente, adquirindo esta, neste caso, eficácia de título executivo.</p>
-
-    <p style="margin-top: 14px;"><strong>* DISPOSIÇÕES FINAIS</strong></p>
-    <p><strong>1.</strong> Na hipótese do COMPRADOR depositar ou transferir quantia a título de sinal de negócio, fica a VENDEDORA obrigada a reservar o veículo objeto da negociação por apenas <strong>48 (quarenta e oito) horas</strong>, ou pelo prazo combinado com o VENDEDOR, e, uma vez frustrado o negócio pelo COMPRADOR — independentemente do motivo — o valor correspondente a <strong>100% (cem por cento)</strong> do sinal será retido pela VENDEDORA em caráter de compensação material.</p>
-    <p><strong>2.</strong> Tratando-se de venda com entrega futura, o prazo acima ajustado poderá ser automaticamente prorrogado por até mais <strong>20 (vinte) dias úteis</strong> quando se verificar atraso por comprovada culpa de fornecedores ou por motivo de força maior não provocado pela VENDEDORA, incluindo casos fortuitos como greves em setor correlato, fenômenos naturais que comprometam o transporte regular do produto, sinistros de transporte e outros.</p>
-    <p><strong>3.</strong> Verificando-se atraso na entrega do bem por culpa exclusiva do COMPRADOR, entendendo-se como tais motivos, entre outros: falta de pagamento do preço total ou parcial (quando financiado), nos termos da cláusula “D”, e falta de documentação de responsabilidade do COMPRADOR, sujeito às penalidades contratuais.</p>
-    <p><strong>4.</strong> Na hipótese da venda ser realizada com prestações futuras ou permanecer compromisso financeiro residual representado por boleto, cheque, nota promissória ou instrumento equivalente, poderá a VENDEDORA, independentemente de notificação prévia, e ainda que já tenha sido realizada a transferência do veículo, <strong>REALIZAR COMUNICADO DE VENDA JUNTO AO DETRAN EM NOME DA VENDEDORA</strong>, persistindo todas as consequências de estilo até a quitação integral do débito pelo COMPRADOR.</p>
-
-    <p style="margin-top: 14px;"><strong>M.1</strong> — Para demonstrar ciência quanto ao comunicado de venda referido acima e à exigência de troca do óleo do motor e filtro de óleo antes de completar <strong>500 (quinhentos) quilômetros</strong> rodados após a retirada do veículo do pátio, mediante apresentação de nota fiscal do serviço para concessão de garantia, o COMPRADOR assinará o campo abaixo, concordando com as consequências que lhe foram explicadas no ato da compra.</p>
-
-    <p style="margin-top: 24px;">Nome: <strong>{{clientName}}</strong> &nbsp;/&nbsp; CPF: <strong>{{clientCpf}}</strong></p>
-
-    <p style="margin-top: 18px;">As partes elegem o <strong>Foro da Comarca de {{city}}</strong> para dirimir controvérsias sobre o presente contrato.</p>
-
-    <p style="margin-top: 14px;"><strong>OBS:</strong> {{observations}}</p>
-
-    <p style="margin-top: 20px; text-align: center;">{{contractDateLong}}</p>
-  </div>
-
-  <div class="jv-page-break" style="break-after: page; page-break-after: always;"></div>
-
-  <header style="display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 24px;">
-    <div style="display: flex; align-items: center; gap: 10px;">
-      <div style="width: 40px; height: 40px; border: 2px solid #c41e3a; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 12px; color: #c41e3a;">JV</div>
-      <div style="font-size: 14pt; font-weight: 800; color: #c41e3a; text-transform: uppercase;">{{companyName}}</div>
-    </div>
-    <div style="text-align: right; font-size: 9.5pt;">
-      <div>{{companyAddress}}</div>
-      <div>CNPJ: {{companyCnpj}}</div>
-    </div>
-  </header>
-
-  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 40px; font-size: 10.5pt;">
-    <div style="text-align: center;">
-      <div style="min-height: 56px; border-bottom: 1px solid #111; margin-bottom: 8px;"></div>
-      <strong>{{clientName}}</strong><br/>
-      CPF/CNPJ: {{clientCpf}}
-    </div>
-    <div style="text-align: center;">
-      <div style="min-height: 56px; border-bottom: 1px solid #111; margin-bottom: 8px;"></div>
-      <strong>{{companyName}}</strong><br/>
-      CNPJ: {{companyCnpj}}
-    </div>
-  </div>
-
-  <p style="margin-top: 48px; font-size: 9pt; color: #555; text-align: center;">Documento gerado para impressão — conservar cópia para ambas as partes.</p>
-</div>`,
+  name: 'Contrato de Venda',
+  content: loadContratoVendaTemplateHtml(),
 };
 
 export function getDefaultSystemSettings(): SystemSettings {
