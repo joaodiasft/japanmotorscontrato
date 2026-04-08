@@ -1,5 +1,5 @@
 {
-  "include": ["src", "vite.config.ts", "server", "api"],
+  "include": ["src", "lib", "vite.config.ts", "server", "api"],
   "compilerOptions": {
     "target": "ES2022",
     "experimentalDecorators": true,
@@ -21,7 +21,7 @@
         "./*"
       ],
       "@contract-template-html": [
-        "./server/contractTemplateHtml.ts"
+        "./lib/contractTemplateHtml.ts"
       ]
     },
     "allowImportingTsExtensions": true,

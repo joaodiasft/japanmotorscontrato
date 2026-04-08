@@ -1,6 +1,6 @@
 /**
- * Reexporta `server/contractTemplateHtml.ts` (alias Vite `@contract-template-html`).
- * A API na Vercel importa o mesmo arquivo via `./contractTemplateHtml` a partir de `server/mappers`.
+ * Reexporta `lib/contractTemplateHtml.ts` (alias Vite `@contract-template-html`).
+ * A API usa cópia inline em `server/mappers.ts` (evita módulo extra na Vercel).
  */
 export {
   contractContentNeedsHtmlMode,
