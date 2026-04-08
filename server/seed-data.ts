@@ -14,7 +14,7 @@ const __seedDir = dirname(fileURLToPath(import.meta.url));
 
 /**
  * Dados da loja inline (sem import de outro módulo) para o bundle da Vercel não falhar.
- * Manter alinhado com `server/brandDefaults.ts`, usado só pelo frontend.
+ * Manter alinhado com `src/config/brand.ts` (front).
  */
 const SEED_COMPANY_NAME = 'Japan Motors';
 const SEED_COMPANY_CNPJ = '00.000.000/0001-00';
@@ -453,7 +453,7 @@ const modernSaleContractTemplate: ContractTemplate = {
 </div>`,
 };
 
-/** Contrato multipágina: contrato-venda-template.html; logo em `server/brandDefaults.ts` / HTML. */
+/** Contrato multipágina: contrato-venda-template.html; logo em `src/config/brand.ts` / HTML. */
 const juniorVeiculosSaleContractTemplate: ContractTemplate = {
   id: 'junior-veiculos-venda',
   name: 'Contrato de Venda',
