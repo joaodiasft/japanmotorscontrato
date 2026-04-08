@@ -23,20 +23,26 @@ async function main() {
 
   const defaults = getDefaultSystemSettings();
 
-  const existingSettings = await prisma.systemSettings.findUnique({ where: { id: 1 } });
-  if (!existingSettings) {
-    await prisma.systemSettings.create({
-      data: {
-        id: 1,
-        companyName: defaults.companyName,
-        cnpj: defaults.cnpj,
-        address: defaults.address,
-        phone: defaults.phone,
-        email: defaults.email,
-        contractTemplates: defaults.contractTemplates as object,
-      },
-    });
-  }
+  await prisma.systemSettings.upsert({
+    where: { id: 1 },
+    create: {
+      id: 1,
+      companyName: defaults.companyName,
+      cnpj: defaults.cnpj,
+      address: defaults.address,
+      phone: defaults.phone,
+      email: defaults.email,
+      contractTemplates: defaults.contractTemplates as object,
+    },
+    update: {
+      companyName: defaults.companyName,
+      cnpj: defaults.cnpj,
+      address: defaults.address,
+      phone: defaults.phone,
+      email: defaults.email,
+      // contractTemplates: não atualizar aqui — preserva edições feitas no painel
+    },
+  });
 
   for (const v of seedVehicles) {
     await prisma.vehicle.upsert({
