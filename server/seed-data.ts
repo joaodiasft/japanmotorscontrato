@@ -12,7 +12,7 @@ import {
   DEFAULT_COMPANY_CNPJ,
   DEFAULT_COMPANY_EMAIL,
   DEFAULT_COMPANY_PHONE_LINE,
-} from '../src/config/brand';
+} from './brandDefaults';
 import { readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';

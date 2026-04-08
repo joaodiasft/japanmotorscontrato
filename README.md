@@ -13,7 +13,7 @@ Se “Configurações” não carregar, o erro costuma ser **falha de conexão c
 ## Contrato de Venda (multipágina)
 
 - Texto: `server/contrato-venda-template.html`
-- Logo: URL em `src/config/brand.ts` (`BRAND_LOGO_URL`, também replicada no HTML do contrato).
+- Logo e dados padrão: `server/brandDefaults.ts` (reexportado em `src/config/brand.ts` para o front).
 - Para **atualizar os modelos no banco**: Configurações → Restaurar modelos padrão (ou `POST /api/settings/reset-templates`).
 
 ## Deploy (Vercel)
