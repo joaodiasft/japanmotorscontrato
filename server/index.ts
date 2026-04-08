@@ -8,6 +8,8 @@ import {
   toSystemSettings,
   toUser,
   toVehicle,
+  mergeContractTemplatesWithDefaults,
+  settingsMissingDefaultTemplateIds,
 } from './mappers';
 import {
   getDefaultSystemSettings,
@@ -283,7 +285,19 @@ app.get('/api/settings', async (_req, res) => {
     });
     return res.json(toSystemSettings(created));
   }
-  res.json(toSystemSettings(row));
+  const defaults = getDefaultSystemSettings();
+  const merged = mergeContractTemplatesWithDefaults(
+    row.contractTemplates,
+    defaults.contractTemplates,
+  );
+  if (settingsMissingDefaultTemplateIds(row.contractTemplates, defaults.contractTemplates)) {
+    const updated = await prisma.systemSettings.update({
+      where: { id: 1 },
+      data: { contractTemplates: merged as object },
+    });
+    return res.json(toSystemSettings(updated));
+  }
+  res.json({ ...toSystemSettings(row), contractTemplates: merged });
 });
 
 app.put('/api/settings', async (req, res) => {

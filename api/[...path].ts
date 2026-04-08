@@ -57,7 +57,11 @@ export default async function handler(req: any, res: any) {
     // Settings
     if (resource === 'settings') {
       const { prisma } = await import('../server/db.js');
-      const { toSystemSettings } = await import('../server/mappers.js');
+      const {
+        toSystemSettings,
+        mergeContractTemplatesWithDefaults,
+        settingsMissingDefaultTemplateIds,
+      } = await import('../server/mappers.js');
       const { getDefaultSystemSettings } = await import('../server/seed-data.js');
 
       const sub = tail[0];
@@ -79,7 +83,19 @@ export default async function handler(req: any, res: any) {
             });
             return jsonResponse(res, 200, toSystemSettings(created));
           }
-          return jsonResponse(res, 200, toSystemSettings(row));
+          const defaults = getDefaultSystemSettings();
+          const merged = mergeContractTemplatesWithDefaults(
+            row.contractTemplates,
+            defaults.contractTemplates,
+          );
+          if (settingsMissingDefaultTemplateIds(row.contractTemplates, defaults.contractTemplates)) {
+            const updated = await prisma.systemSettings.update({
+              where: { id: 1 },
+              data: { contractTemplates: merged as any },
+            });
+            return jsonResponse(res, 200, toSystemSettings(updated));
+          }
+          return jsonResponse(res, 200, { ...toSystemSettings(row), contractTemplates: merged });
         }
 
         if (req.method === 'PUT') {

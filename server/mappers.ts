@@ -161,3 +161,37 @@ export function toSystemSettings(row: {
     contractTemplates: templates,
   };
 }
+
+/** Injeta modelos novos do código (ex.: Contrato de Venda) que ainda não existem no JSON gravado no banco. */
+export function mergeContractTemplatesWithDefaults(
+  storedRaw: Prisma.JsonValue,
+  defaultTemplates: ContractTemplate[],
+): ContractTemplate[] {
+  const stored: ContractTemplate[] = Array.isArray(storedRaw)
+    ? (storedRaw as ContractTemplate[])
+    : [];
+  const storedById = new Map(stored.map((t) => [t.id, t]));
+  const defaultIds = new Set(defaultTemplates.map((t) => t.id));
+
+  const merged: ContractTemplate[] = [];
+  for (const d of defaultTemplates) {
+    merged.push(storedById.get(d.id) ?? d);
+  }
+  for (const t of stored) {
+    if (!defaultIds.has(t.id)) {
+      merged.push(t);
+    }
+  }
+  return merged;
+}
+
+export function settingsMissingDefaultTemplateIds(
+  storedRaw: Prisma.JsonValue,
+  defaultTemplates: ContractTemplate[],
+): boolean {
+  const stored: ContractTemplate[] = Array.isArray(storedRaw)
+    ? (storedRaw as ContractTemplate[])
+    : [];
+  const storedIds = new Set(stored.map((t) => t.id));
+  return defaultTemplates.some((d) => !storedIds.has(d.id));
+}
