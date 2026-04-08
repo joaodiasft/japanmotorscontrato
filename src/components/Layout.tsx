@@ -17,6 +17,7 @@ import { twMerge } from 'tailwind-merge';
 import {
   BRAND_INSTAGRAM_HANDLE,
   BRAND_INSTAGRAM_URL,
+  BRAND_LOGO_ALT,
   BRAND_LOGO_URL,
   BRAND_NAME,
   BRAND_TAGLINE,
@@ -61,7 +62,7 @@ export default function Layout({ children }: LayoutProps) {
             <Link to="/" className="flex items-center gap-3 min-w-0">
               <img
                 src={BRAND_LOGO_URL}
-                alt={BRAND_NAME}
+                alt={BRAND_LOGO_ALT}
                 className="h-10 w-auto object-contain shrink-0"
                 referrerPolicy="no-referrer"
               />

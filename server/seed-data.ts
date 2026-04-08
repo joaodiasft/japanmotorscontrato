@@ -6,6 +6,13 @@ import type {
   User,
   Vehicle,
 } from '../src/types';
+import {
+  BRAND_NAME,
+  DEFAULT_COMPANY_ADDRESS,
+  DEFAULT_COMPANY_CNPJ,
+  DEFAULT_COMPANY_EMAIL,
+  DEFAULT_COMPANY_PHONE_LINE,
+} from '../src/config/brand';
 import { readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -442,7 +449,7 @@ const modernSaleContractTemplate: ContractTemplate = {
 </div>`,
 };
 
-/** Contrato multipágina (4 folhas): contrato-venda-template.html; logo /public/logo-contrato.png */
+/** Contrato multipágina: contrato-venda-template.html; logo em URL (ver `BRAND_LOGO_URL` em brand.ts). */
 const juniorVeiculosSaleContractTemplate: ContractTemplate = {
   id: 'junior-veiculos-venda',
   name: 'Contrato de Venda',
@@ -451,12 +458,11 @@ const juniorVeiculosSaleContractTemplate: ContractTemplate = {
 
 export function getDefaultSystemSettings(): SystemSettings {
   return {
-    companyName: 'Japan Motors',
-    cnpj: '00.000.000/0001-00',
-    address:
-      'Av. Contorno, QD35 - LT 39 - Jardim Colorado, Goiânia - GO, 74474-048',
-    phone: 'Instagram @japanmotors_go',
-    email: 'contato@japanmotors.com.br',
+    companyName: BRAND_NAME,
+    cnpj: DEFAULT_COMPANY_CNPJ,
+    address: DEFAULT_COMPANY_ADDRESS,
+    phone: DEFAULT_COMPANY_PHONE_LINE,
+    email: DEFAULT_COMPANY_EMAIL,
     contractTemplates: [
       juniorVeiculosSaleContractTemplate,
       defaultTemplate,

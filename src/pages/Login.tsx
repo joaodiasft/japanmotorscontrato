@@ -11,6 +11,7 @@ import { motion } from 'motion/react';
 import {
   BRAND_INSTAGRAM_HANDLE,
   BRAND_INSTAGRAM_URL,
+  BRAND_LOGO_ALT,
   BRAND_LOGO_URL,
   BRAND_NAME,
   BRAND_TAGLINE,
@@ -45,7 +46,7 @@ export default function Login() {
           >
             <img
               src={BRAND_LOGO_URL}
-              alt={BRAND_NAME}
+              alt={BRAND_LOGO_ALT}
               className="h-24 w-auto object-contain mx-auto"
               referrerPolicy="no-referrer"
             />
@@ -139,7 +140,7 @@ export default function Login() {
         {/* Footer */}
         <div className="text-center">
           <p className="text-xs text-gray-400 font-medium uppercase tracking-widest">
-            © 2026 Japan Motors • v2.6.0
+            © 2026 Japan Motors • v2.6.1
           </p>
         </div>
       </div>

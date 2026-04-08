@@ -24,7 +24,7 @@ import { storage } from '../services/storage';
 import { Contract, Client, Vehicle, SystemSettings } from '../types';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
-import { BRAND_LOGO_URL, BRAND_NAME } from '../config/brand';
+import { BRAND_LOGO_ALT, BRAND_LOGO_URL, BRAND_NAME } from '../config/brand';
 
 const replaceVariables = (content: string, data: Record<string, string>) => {
   let result = content;
@@ -375,7 +375,7 @@ export default function ContractView() {
             <div className="flex items-center gap-3">
               <img
                 src={BRAND_LOGO_URL}
-                alt={BRAND_NAME}
+                alt={BRAND_LOGO_ALT}
                 className="h-12 w-auto object-contain"
                 referrerPolicy="no-referrer"
               />
