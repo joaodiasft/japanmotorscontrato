@@ -9,7 +9,7 @@ import {
   toUser,
   toVehicle,
   mergeContractTemplatesWithDefaults,
-  settingsMissingDefaultTemplateIds,
+  contractTemplatesNeedDbUpdate,
 } from './mappers';
 import {
   getDefaultSystemSettings,
@@ -290,7 +290,7 @@ app.get('/api/settings', async (_req, res) => {
     row.contractTemplates,
     defaults.contractTemplates,
   );
-  if (settingsMissingDefaultTemplateIds(row.contractTemplates, defaults.contractTemplates)) {
+  if (contractTemplatesNeedDbUpdate(row.contractTemplates, merged)) {
     const updated = await prisma.systemSettings.update({
       where: { id: 1 },
       data: { contractTemplates: merged as object },

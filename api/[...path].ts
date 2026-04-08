@@ -60,7 +60,7 @@ export default async function handler(req: any, res: any) {
       const {
         toSystemSettings,
         mergeContractTemplatesWithDefaults,
-        settingsMissingDefaultTemplateIds,
+        contractTemplatesNeedDbUpdate,
       } = await import('../server/mappers.js');
       const { getDefaultSystemSettings } = await import('../server/seed-data.js');
 
@@ -88,7 +88,7 @@ export default async function handler(req: any, res: any) {
             row.contractTemplates,
             defaults.contractTemplates,
           );
-          if (settingsMissingDefaultTemplateIds(row.contractTemplates, defaults.contractTemplates)) {
+          if (contractTemplatesNeedDbUpdate(row.contractTemplates, merged)) {
             const updated = await prisma.systemSettings.update({
               where: { id: 1 },
               data: { contractTemplates: merged as any },

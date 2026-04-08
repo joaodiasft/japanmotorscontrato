@@ -162,7 +162,10 @@ export function toSystemSettings(row: {
   };
 }
 
-/** Injeta modelos novos do código (ex.: Contrato de Venda) que ainda não existem no JSON gravado no banco. */
+/** IDs cujo HTML vem sempre do arquivo em `server/` (atualiza layout após deploy). */
+export const TEMPLATE_IDS_FROM_REPO = new Set(['junior-veiculos-venda']);
+
+/** Injeta modelos novos e reaplica o conteúdo dos modelos “fixos” do repositório. */
 export function mergeContractTemplatesWithDefaults(
   storedRaw: Prisma.JsonValue,
   defaultTemplates: ContractTemplate[],
@@ -175,7 +178,11 @@ export function mergeContractTemplatesWithDefaults(
 
   const merged: ContractTemplate[] = [];
   for (const d of defaultTemplates) {
-    merged.push(storedById.get(d.id) ?? d);
+    if (TEMPLATE_IDS_FROM_REPO.has(d.id)) {
+      merged.push(d);
+    } else {
+      merged.push(storedById.get(d.id) ?? d);
+    }
   }
   for (const t of stored) {
     if (!defaultIds.has(t.id)) {
@@ -183,6 +190,16 @@ export function mergeContractTemplatesWithDefaults(
     }
   }
   return merged;
+}
+
+/** True se o JSON gravado no banco difere do merge (novos modelos ou HTML atualizado do repositório). */
+export function contractTemplatesNeedDbUpdate(
+  storedRaw: Prisma.JsonValue,
+  merged: ContractTemplate[],
+): boolean {
+  const prev = JSON.stringify(Array.isArray(storedRaw) ? storedRaw : []);
+  const next = JSON.stringify(merged);
+  return prev !== next;
 }
 
 export function settingsMissingDefaultTemplateIds(

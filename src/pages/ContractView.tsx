@@ -417,6 +417,13 @@ export default function ContractView() {
         .contract-content .contract-jv-root .cv-brand-logo {
           filter: invert(1) brightness(0.35) contrast(1.1);
         }
+        .contract-content .contract-jv-root .cv-print-only-break {
+          display: none !important;
+          height: 0 !important;
+          margin: 0 !important;
+          padding: 0 !important;
+          overflow: hidden !important;
+        }
         @media print {
           html, body {
             background: white !important;
@@ -462,9 +469,28 @@ export default function ContractView() {
             line-height: 1.45 !important;
             color: #000 !important;
           }
-          .contract-content .contract-jv-root .jv-field-table {
+          .contract-content .contract-jv-root .jv-field-table,
+          .contract-content .contract-jv-root .cv-form-table {
             font-family: 'Courier New', Courier, monospace !important;
             font-size: 10pt !important;
+          }
+          .contract-content .contract-jv-root .cv-print-only-break {
+            display: block !important;
+            height: 0 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            overflow: hidden !important;
+            border: 0 !important;
+            break-after: page !important;
+            page-break-after: always !important;
+          }
+          .contract-content .contract-jv-root section.cv-sheet {
+            break-after: auto !important;
+            page-break-after: auto !important;
+          }
+          .contract-content .contract-jv-root section.cv-sheet:last-of-type {
+            break-after: auto !important;
+            page-break-after: auto !important;
           }
           .contract-content .contract-jv-root .jv-page-break {
             break-after: page !important;
@@ -477,9 +503,14 @@ export default function ContractView() {
           .contract-content .contract-jv-root table {
             page-break-inside: auto;
           }
-          .contract-content .contract-jv-root tr {
-            break-inside: avoid;
-            page-break-inside: avoid;
+          .contract-content .contract-jv-root .cv-form-table tr,
+          .contract-content .contract-jv-root .cv-price tr {
+            break-inside: auto !important;
+            page-break-inside: auto !important;
+          }
+          .contract-content .contract-jv-root .cv-signatures {
+            break-inside: avoid !important;
+            page-break-inside: avoid !important;
           }
           * {
             -webkit-print-color-adjust: exact !important;
