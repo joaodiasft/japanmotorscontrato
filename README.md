@@ -13,7 +13,7 @@ Se “Configurações” não carregar, o erro costuma ser **falha de conexão c
 ## Contrato de Venda (multipágina)
 
 - Texto: `server/contrato-venda-template.html`
-- Logo e dados padrão: `server/brandDefaults.ts` (reexportado em `src/config/brand.ts` para o front).
+- Logo e dados no front: `server/brandDefaults.ts` → `src/config/brand.ts`. O `getDefaultSystemSettings()` em `server/seed-data.ts` usa constantes **inline** (compatível com a Vercel).
 - Para **atualizar os modelos no banco**: Configurações → Restaurar modelos padrão (ou `POST /api/settings/reset-templates`).
 
 ## Deploy (Vercel)

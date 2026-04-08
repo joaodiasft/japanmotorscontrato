@@ -6,18 +6,22 @@ import type {
   User,
   Vehicle,
 } from '../src/types';
-import {
-  BRAND_NAME,
-  DEFAULT_COMPANY_ADDRESS,
-  DEFAULT_COMPANY_CNPJ,
-  DEFAULT_COMPANY_EMAIL,
-  DEFAULT_COMPANY_PHONE_LINE,
-} from './brandDefaults';
 import { readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const __seedDir = dirname(fileURLToPath(import.meta.url));
+
+/**
+ * Dados da loja inline (sem import de outro módulo) para o bundle da Vercel não falhar.
+ * Manter alinhado com `server/brandDefaults.ts`, usado só pelo frontend.
+ */
+const SEED_COMPANY_NAME = 'Japan Motors';
+const SEED_COMPANY_CNPJ = '00.000.000/0001-00';
+const SEED_COMPANY_ADDRESS =
+  'Av. Contorno, QD35 - LT 39 - Jardim Colorado, Goiânia - GO, 74474-048';
+const SEED_COMPANY_PHONE_LINE = 'Instagram @japanmotors_go';
+const SEED_COMPANY_EMAIL = 'contato@japanmotors.com.br';
 
 function loadContratoVendaTemplateHtml(): string {
   const cwdServer = join(process.cwd(), 'server', 'contrato-venda-template.html');
@@ -449,7 +453,7 @@ const modernSaleContractTemplate: ContractTemplate = {
 </div>`,
 };
 
-/** Contrato multipágina: contrato-venda-template.html; logo em URL (ver `BRAND_LOGO_URL` em brand.ts). */
+/** Contrato multipágina: contrato-venda-template.html; logo em `server/brandDefaults.ts` / HTML. */
 const juniorVeiculosSaleContractTemplate: ContractTemplate = {
   id: 'junior-veiculos-venda',
   name: 'Contrato de Venda',
@@ -458,11 +462,11 @@ const juniorVeiculosSaleContractTemplate: ContractTemplate = {
 
 export function getDefaultSystemSettings(): SystemSettings {
   return {
-    companyName: BRAND_NAME,
-    cnpj: DEFAULT_COMPANY_CNPJ,
-    address: DEFAULT_COMPANY_ADDRESS,
-    phone: DEFAULT_COMPANY_PHONE_LINE,
-    email: DEFAULT_COMPANY_EMAIL,
+    companyName: SEED_COMPANY_NAME,
+    cnpj: SEED_COMPANY_CNPJ,
+    address: SEED_COMPANY_ADDRESS,
+    phone: SEED_COMPANY_PHONE_LINE,
+    email: SEED_COMPANY_EMAIL,
     contractTemplates: [
       juniorVeiculosSaleContractTemplate,
       defaultTemplate,
