@@ -241,7 +241,7 @@ export default function Clients() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                   {/* Personal Info */}
                   <div className="space-y-6">
-                    <h3 className="text-xs font-bold text-red-600 uppercase tracking-widest flex items-center gap-2">
+                    <h3 className="text-xs font-bold text-neutral-800 uppercase tracking-widest flex items-center gap-2">
                       <User className="w-4 h-4" />
                       Dados Pessoais
                     </h3>
@@ -349,7 +349,7 @@ export default function Clients() {
 
                       {/* Vehicle Assignment */}
                       <div className="space-y-4 pt-4">
-                        <h3 className="text-xs font-bold text-red-600 uppercase tracking-widest flex items-center gap-2">
+                        <h3 className="text-xs font-bold text-neutral-800 uppercase tracking-widest flex items-center gap-2">
                           <Car className="w-4 h-4" />
                           Atribuir Veículo (Opcional)
                         </h3>
@@ -362,7 +362,7 @@ export default function Clients() {
                               className={cn(
                                 "flex items-center justify-between p-3 rounded-xl border transition-all text-left",
                                 newClient.assignedVehicles?.includes(vehicle.id)
-                                  ? "border-red-600 bg-red-50"
+                                  ? "border-neutral-800 bg-gray-100"
                                   : "border-gray-100 hover:border-gray-200"
                               )}
                             >
@@ -371,7 +371,7 @@ export default function Clients() {
                                 <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{vehicle.plate} • {vehicle.year}</p>
                               </div>
                               {newClient.assignedVehicles?.includes(vehicle.id) && (
-                                <div className="w-5 h-5 bg-red-600 rounded-full flex items-center justify-center">
+                                <div className="w-5 h-5 bg-neutral-900 rounded-full flex items-center justify-center">
                                   <CheckCircle2 className="w-3 h-3 text-white" />
                                 </div>
                               )}
@@ -387,7 +387,7 @@ export default function Clients() {
 
                   {/* Address */}
                   <div className="space-y-6">
-                    <h3 className="text-xs font-bold text-red-600 uppercase tracking-widest flex items-center gap-2">
+                    <h3 className="text-xs font-bold text-neutral-800 uppercase tracking-widest flex items-center gap-2">
                       <MapIcon className="w-4 h-4" />
                       Endereço
                     </h3>
@@ -502,7 +502,7 @@ export default function Clients() {
             onClick={() => setActiveFilter('all')}
             className={cn(
               "flex-1 md:px-6 py-2 rounded-lg text-sm font-bold transition-all",
-              activeFilter === 'all' ? "bg-white shadow-sm text-red-600" : "text-gray-500 hover:text-gray-900"
+              activeFilter === 'all' ? "bg-white shadow-sm text-neutral-800" : "text-gray-500 hover:text-gray-900"
             )}
           >
             Todos
@@ -511,7 +511,7 @@ export default function Clients() {
             onClick={() => setActiveFilter('active')}
             className={cn(
               "flex-1 md:px-6 py-2 rounded-lg text-sm font-bold transition-all",
-              activeFilter === 'active' ? "bg-white shadow-sm text-red-600" : "text-gray-500 hover:text-gray-900"
+              activeFilter === 'active' ? "bg-white shadow-sm text-neutral-800" : "text-gray-500 hover:text-gray-900"
             )}
           >
             Ativos
@@ -520,7 +520,7 @@ export default function Clients() {
             onClick={() => setActiveFilter('lead')}
             className={cn(
               "flex-1 md:px-6 py-2 rounded-lg text-sm font-bold transition-all",
-              activeFilter === 'lead' ? "bg-white shadow-sm text-red-600" : "text-gray-500 hover:text-gray-900"
+              activeFilter === 'lead' ? "bg-white shadow-sm text-neutral-800" : "text-gray-500 hover:text-gray-900"
             )}
           >
             Leads
@@ -529,7 +529,7 @@ export default function Clients() {
             onClick={() => setActiveFilter('vip')}
             className={cn(
               "flex-1 md:px-6 py-2 rounded-lg text-sm font-bold transition-all",
-              activeFilter === 'vip' ? "bg-white shadow-sm text-red-600" : "text-gray-500 hover:text-gray-900"
+              activeFilter === 'vip' ? "bg-white shadow-sm text-neutral-800" : "text-gray-500 hover:text-gray-900"
             )}
           >
             VIP
@@ -540,7 +540,7 @@ export default function Clients() {
           <input 
             type="text" 
             placeholder="Buscar por nome, email, CPF ou telefone..." 
-            className="w-full pl-10 pr-4 py-2 rounded-xl border border-gray-100 bg-gray-50 focus:bg-white focus:border-red-600 outline-none transition-all"
+            className="w-full pl-10 pr-4 py-2 rounded-xl border border-gray-100 bg-gray-50 focus:bg-white focus:border-neutral-800 outline-none transition-all"
             value={searchTerm}
             onChange={e => setSearchTerm(e.target.value)}
           />
@@ -555,7 +555,7 @@ export default function Clients() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: index * 0.05 }}
-            className="card p-0 overflow-hidden group hover:border-red-200 transition-all flex flex-col"
+            className="card p-0 overflow-hidden group hover:border-gray-200 transition-all flex flex-col"
           >
             {/* Card Header with Status */}
             <div className="p-6 pb-4 border-b border-gray-50 relative">
@@ -569,7 +569,7 @@ export default function Clients() {
               </div>
               
               <div className="flex items-center gap-4">
-                <div className="w-16 h-16 rounded-2xl bg-gray-50 text-gray-400 flex items-center justify-center font-black text-2xl border border-gray-100 group-hover:bg-red-50 group-hover:text-red-600 transition-colors">
+                <div className="w-16 h-16 rounded-2xl bg-gray-50 text-gray-400 flex items-center justify-center font-black text-2xl border border-gray-100 group-hover:bg-gray-100 group-hover:text-neutral-800 transition-colors">
                   {client.name.charAt(0)}
                 </div>
                 <div className="min-w-0">
@@ -586,7 +586,7 @@ export default function Clients() {
               {/* Contact Info */}
               <div className="grid grid-cols-1 gap-3">
                 <div className="flex items-center gap-3 text-gray-600 group/link cursor-pointer">
-                  <div className="w-8 h-8 rounded-lg bg-gray-50 flex items-center justify-center text-gray-400 group-hover/link:bg-red-50 group-hover/link:text-red-600 transition-colors">
+                  <div className="w-8 h-8 rounded-lg bg-gray-50 flex items-center justify-center text-gray-400 group-hover/link:bg-gray-100 group-hover/link:text-neutral-800 transition-colors">
                     <Mail className="w-4 h-4" />
                   </div>
                   <span className="text-sm font-medium truncate">{client.email}</span>
@@ -635,7 +635,7 @@ export default function Clients() {
                       if (!vehicle) return null;
                       return (
                         <span key={vId} className="inline-flex items-center gap-1 px-2 py-1 bg-white border border-gray-100 text-gray-600 rounded-lg text-[10px] font-bold shadow-sm">
-                          <Car className="w-3 h-3 text-red-600" />
+                          <Car className="w-3 h-3 text-neutral-800" />
                           {vehicle.brand} {vehicle.model}
                         </span>
                       );
@@ -653,7 +653,7 @@ export default function Clients() {
               <div className="flex gap-2">
                 <button 
                   onClick={() => navigate(`/contratos?clientId=${client.id}`)}
-                  className="flex-1 h-10 bg-red-600 text-white rounded-xl text-xs font-black uppercase tracking-widest hover:bg-red-700 transition-all shadow-lg shadow-red-600/20 flex items-center justify-center gap-2"
+                  className="flex-1 h-10 bg-neutral-900 text-white rounded-xl text-xs font-black uppercase tracking-widest hover:bg-neutral-800 transition-all shadow-lg shadow-neutral-900/15 flex items-center justify-center gap-2"
                 >
                   <FileCode className="w-4 h-4" />
                   Vender
@@ -691,7 +691,7 @@ export default function Clients() {
                   </button>
                   <button 
                     onClick={() => handleDelete(client.id)}
-                    className="w-10 h-10 bg-gray-50 text-gray-400 rounded-xl hover:bg-red-50 hover:text-red-600 transition-all flex items-center justify-center border border-gray-100"
+                    className="w-10 h-10 bg-gray-50 text-gray-400 rounded-xl hover:bg-gray-100 hover:text-neutral-800 transition-all flex items-center justify-center border border-gray-100"
                     title="Excluir"
                   >
                     <Trash2 className="w-4 h-4" />
@@ -715,7 +715,7 @@ export default function Clients() {
             >
               <div className="p-8 border-b border-gray-100 bg-gray-50/50 flex items-center justify-between">
                 <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 rounded-2xl bg-red-600 text-white flex items-center justify-center font-black text-2xl shadow-lg shadow-red-600/20">
+                  <div className="w-16 h-16 rounded-2xl bg-neutral-900 text-white flex items-center justify-center font-black text-2xl shadow-lg shadow-neutral-900/15">
                     {viewingClient.name.charAt(0)}
                   </div>
                   <div>
@@ -740,7 +740,7 @@ export default function Clients() {
                 {/* Personal Info */}
                 <div className="grid grid-cols-2 gap-8">
                   <div className="space-y-4">
-                    <h3 className="text-xs font-black text-red-600 uppercase tracking-widest flex items-center gap-2">
+                    <h3 className="text-xs font-black text-neutral-800 uppercase tracking-widest flex items-center gap-2">
                       <User className="w-4 h-4" />
                       Dados Pessoais
                     </h3>
@@ -769,7 +769,7 @@ export default function Clients() {
                   </div>
 
                   <div className="space-y-4">
-                    <h3 className="text-xs font-black text-red-600 uppercase tracking-widest flex items-center gap-2">
+                    <h3 className="text-xs font-black text-neutral-800 uppercase tracking-widest flex items-center gap-2">
                       <MapPin className="w-4 h-4" />
                       Endereço
                     </h3>
@@ -800,7 +800,7 @@ export default function Clients() {
                 {/* Financial & Interests */}
                 <div className="grid grid-cols-2 gap-8 pt-8 border-t border-gray-100">
                   <div className="space-y-4">
-                    <h3 className="text-xs font-black text-red-600 uppercase tracking-widest flex items-center gap-2">
+                    <h3 className="text-xs font-black text-neutral-800 uppercase tracking-widest flex items-center gap-2">
                       <DollarSign className="w-4 h-4" />
                       Histórico Financeiro
                     </h3>
@@ -821,7 +821,7 @@ export default function Clients() {
                   </div>
 
                   <div className="space-y-4">
-                    <h3 className="text-xs font-black text-red-600 uppercase tracking-widest flex items-center gap-2">
+                    <h3 className="text-xs font-black text-neutral-800 uppercase tracking-widest flex items-center gap-2">
                       <Car className="w-4 h-4" />
                       Veículos de Interesse
                     </h3>
@@ -833,7 +833,7 @@ export default function Clients() {
                           return (
                             <div key={vId} className="flex items-center justify-between p-3 bg-white border border-gray-100 rounded-xl shadow-sm">
                               <div className="flex items-center gap-3">
-                                <div className="w-8 h-8 rounded-lg bg-red-50 flex items-center justify-center text-red-600">
+                                <div className="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center text-neutral-800">
                                   <Car className="w-4 h-4" />
                                 </div>
                                 <div>
@@ -841,7 +841,7 @@ export default function Clients() {
                                   <p className="text-[10px] text-gray-400 font-bold uppercase">{vehicle.year} • {vehicle.color}</p>
                                 </div>
                               </div>
-                              <span className="text-xs font-black text-red-600">
+                              <span className="text-xs font-black text-neutral-800">
                                 {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(vehicle.salePrice)}
                               </span>
                             </div>
@@ -857,7 +857,7 @@ export default function Clients() {
                 {/* Notes */}
                 {viewingClient.notes && (
                   <div className="space-y-4 pt-8 border-t border-gray-100">
-                    <h3 className="text-xs font-black text-red-600 uppercase tracking-widest flex items-center gap-2">
+                    <h3 className="text-xs font-black text-neutral-800 uppercase tracking-widest flex items-center gap-2">
                       <StickyNote className="w-4 h-4" />
                       Observações Internas
                     </h3>

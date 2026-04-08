@@ -10,6 +10,17 @@ import {
 const prisma = new PrismaClient();
 
 async function main() {
+  const vehicleIds = seedVehicles.map((v) => v.id);
+  const clientIds = seedClients.map((c) => c.id);
+
+  await prisma.contract.deleteMany({
+    where: {
+      OR: [{ vehicleId: { notIn: vehicleIds } }, { clientId: { notIn: clientIds } }],
+    },
+  });
+  await prisma.vehicle.deleteMany({ where: { id: { notIn: vehicleIds } } });
+  await prisma.client.deleteMany({ where: { id: { notIn: clientIds } } });
+
   const defaults = getDefaultSystemSettings();
 
   const existingSettings = await prisma.systemSettings.findUnique({ where: { id: 1 } });

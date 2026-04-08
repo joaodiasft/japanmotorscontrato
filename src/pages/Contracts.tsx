@@ -173,7 +173,7 @@ export default function Contracts() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
                   {/* Step 1: Parties */}
                   <div className="space-y-6">
-                    <h3 className="text-xs font-bold text-red-600 uppercase tracking-widest flex items-center gap-2">
+                    <h3 className="text-xs font-bold text-neutral-800 uppercase tracking-widest flex items-center gap-2">
                       <User className="w-4 h-4" />
                       1. Partes e Modelo
                     </h3>
@@ -232,7 +232,7 @@ export default function Contracts() {
 
                   {/* Step 2: Financials */}
                   <div className="space-y-6">
-                    <h3 className="text-xs font-bold text-red-600 uppercase tracking-widest flex items-center gap-2">
+                    <h3 className="text-xs font-bold text-neutral-800 uppercase tracking-widest flex items-center gap-2">
                       <DollarSign className="w-4 h-4" />
                       2. Condições Comerciais
                     </h3>
@@ -284,7 +284,7 @@ export default function Contracts() {
 
                   {/* Step 3: Terms */}
                   <div className="space-y-6">
-                    <h3 className="text-xs font-bold text-red-600 uppercase tracking-widest flex items-center gap-2">
+                    <h3 className="text-xs font-bold text-neutral-800 uppercase tracking-widest flex items-center gap-2">
                       <ShieldCheck className="w-4 h-4" />
                       3. Termos e Garantia
                     </h3>
@@ -321,15 +321,15 @@ export default function Contracts() {
                 </div>
 
                 {/* Preview Section */}
-                <div className="p-6 bg-red-50 rounded-2xl border border-red-100 flex items-center gap-4">
-                  <div className="w-12 h-12 bg-red-600 text-white rounded-xl flex items-center justify-center">
+                <div className="p-6 bg-gray-100 rounded-2xl border border-gray-200 flex items-center gap-4">
+                  <div className="w-12 h-12 bg-neutral-900 text-white rounded-xl flex items-center justify-center">
                     <FileText className="w-6 h-6" />
                   </div>
                   <div className="flex-1">
-                    <h4 className="font-bold text-red-900">Pré-visualização do Documento</h4>
-                    <p className="text-sm text-red-700">O sistema irá gerar um PDF formatado com todas as cláusulas legais da Japan Motors.</p>
+                    <h4 className="font-bold text-neutral-900">Pré-visualização do Documento</h4>
+                    <p className="text-sm text-neutral-800">O sistema irá gerar um PDF formatado com todas as cláusulas legais da Japan Motors.</p>
                   </div>
-                  <button className="btn-secondary border-red-200 text-red-600 hover:bg-red-100">
+                  <button className="btn-secondary border-gray-200 text-neutral-800 hover:bg-gray-200">
                     Ver Rascunho
                   </button>
                 </div>
@@ -393,7 +393,7 @@ export default function Contracts() {
             <input 
               type="text" 
               placeholder="Buscar por número do contrato, cliente ou veículo..." 
-              className="w-full pl-10 pr-4 py-2 rounded-xl border border-gray-100 bg-gray-50 focus:bg-white focus:border-red-600 outline-none transition-all"
+              className="w-full pl-10 pr-4 py-2 rounded-xl border border-gray-100 bg-gray-50 focus:bg-white focus:border-neutral-800 outline-none transition-all"
               value={searchTerm}
               onChange={e => setSearchTerm(e.target.value)}
             />
@@ -483,7 +483,7 @@ export default function Contracts() {
                           <Download className="w-4 h-4" />
                         </button>
                         <button
-                          className="p-2 hover:bg-red-100 rounded-lg text-red-600 transition-all"
+                          className="p-2 hover:bg-gray-200 rounded-lg text-neutral-800 transition-all"
                           onClick={(e) => { e.stopPropagation(); navigate(`/contratos/${contract.id}`); }}
                         >
                           <ChevronRight className="w-4 h-4" />

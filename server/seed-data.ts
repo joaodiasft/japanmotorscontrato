@@ -351,7 +351,7 @@ const modernSaleContractTemplate: ContractTemplate = {
   </div>
 
   <div style="margin-bottom: 30px;">
-    <h2 style="font-size: 14px; font-weight: 700; text-transform: uppercase; color: #374151; border-left: 4px solid #ef4444; padding-left: 12px; margin-bottom: 16px;">1. Partes Contratantes</h2>
+    <h2 style="font-size: 14px; font-weight: 700; text-transform: uppercase; color: #374151; border-left: 4px solid #4b5563; padding-left: 12px; margin-bottom: 16px;">1. Partes Contratantes</h2>
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; font-size: 13px; line-height: 1.5;">
       <div style="background: #f9fafb; padding: 16px; border-radius: 8px;">
         <p style="font-weight: 700; color: #111827; margin-bottom: 8px; text-transform: uppercase; font-size: 11px;">Vendedor</p>
@@ -369,7 +369,7 @@ const modernSaleContractTemplate: ContractTemplate = {
   </div>
 
   <div style="margin-bottom: 30px;">
-    <h2 style="font-size: 14px; font-weight: 700; text-transform: uppercase; color: #374151; border-left: 4px solid #ef4444; padding-left: 12px; margin-bottom: 16px;">2. Objeto do Contrato</h2>
+    <h2 style="font-size: 14px; font-weight: 700; text-transform: uppercase; color: #374151; border-left: 4px solid #4b5563; padding-left: 12px; margin-bottom: 16px;">2. Objeto do Contrato</h2>
     <div style="background: #fff; border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden;">
       <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: #e5e7eb;">
         <div style="background: #fff; padding: 12px;">
@@ -401,14 +401,14 @@ const modernSaleContractTemplate: ContractTemplate = {
   </div>
 
   <div style="margin-bottom: 30px;">
-    <h2 style="font-size: 14px; font-weight: 700; text-transform: uppercase; color: #374151; border-left: 4px solid #ef4444; padding-left: 12px; margin-bottom: 16px;">3. Condições Comerciais</h2>
-    <div style="background: #fef2f2; border: 1px solid #fee2e2; padding: 20px; border-radius: 8px;">
+    <h2 style="font-size: 14px; font-weight: 700; text-transform: uppercase; color: #374151; border-left: 4px solid #4b5563; padding-left: 12px; margin-bottom: 16px;">3. Condições Comerciais</h2>
+    <div style="background: #f9fafb; border: 1px solid #e5e7eb; padding: 20px; border-radius: 8px;">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-        <span style="font-size: 14px; color: #991b1b;">Valor Total da Transação</span>
-        <span style="font-size: 20px; font-weight: 800; color: #991b1b;">{{totalValue}}</span>
+        <span style="font-size: 14px; color: #374151;">Valor Total da Transação</span>
+        <span style="font-size: 20px; font-weight: 800; color: #111827;">{{totalValue}}</span>
       </div>
-      <p style="font-size: 12px; color: #b91c1c; margin-bottom: 16px;">({{totalValueWords}})</p>
-      <div style="border-top: 1px solid #fecaca; padding-top: 16px; font-size: 13px;">
+      <p style="font-size: 12px; color: #4b5563; margin-bottom: 16px;">({{totalValueWords}})</p>
+      <div style="border-top: 1px solid #e5e7eb; padding-top: 16px; font-size: 13px;">
         <p style="margin-bottom: 8px;"><strong>Forma de Pagamento:</strong> {{paymentMethod}}</p>
         <p><strong>Entrada:</strong> {{downPayment}}</p>
       </div>
@@ -452,9 +452,10 @@ const juniorVeiculosSaleContractTemplate: ContractTemplate = {
 export function getDefaultSystemSettings(): SystemSettings {
   return {
     companyName: 'Japan Motors',
-    cnpj: '12.345.678/0001-90',
-    address: 'Av. das Nações, 1500 - São Paulo, SP',
-    phone: '(11) 3344-5566',
+    cnpj: '00.000.000/0001-00',
+    address:
+      'Av. Contorno, QD35 - LT 39 - Jardim Colorado, Goiânia - GO, 74474-048',
+    phone: 'Instagram @japanmotors_go',
     email: 'contato@japanmotors.com.br',
     contractTemplates: [
       juniorVeiculosSaleContractTemplate,
@@ -472,55 +473,79 @@ export const seedVehicles: Vehicle[] = [
   {
     id: '1',
     type: 'car',
-    brand: 'Honda',
-    model: 'Civic Touring',
-    year: 2022,
+    brand: 'Chevrolet',
+    model: 'Onix LT2 1.0',
+    year: 2023,
     color: 'Prata',
-    plate: 'ABC-1234',
-    vin: '9BR123...',
-    renavam: '123456789',
-    mileage: 15430,
+    plate: 'JPN-1A23',
+    vin: '9BGKN69A0PB123456',
+    renavam: '12345678901',
+    mileage: 28000,
     fuel: 'Flex',
-    acquisitionPrice: 120000,
-    salePrice: 145900,
+    acquisitionPrice: 58000,
+    salePrice: 66900,
     status: 'available',
-    images: ['https://picsum.photos/seed/civic/400/300'],
+    images: ['https://picsum.photos/seed/onix2023/800/600'],
+    inspectionNotes: `CHEVROLET ONIX LT2 1.0 2022/23 — Completo | Econômico | Moderno | Muito novo.
+Se você procura um carro bonito, confortável, econômico e tecnológico, esse Onix LT2 1.0 2023 é a escolha certa.
+Versão completa, motor 1.0 super econômico, câmera de ré, start/stop, multimídia, direção elétrica, ar-condicionado, vidros/travas/retrovisores elétricos. Excelente para cidade e viagem. Design moderno, ótimo espaço interno, confortável, qualidade Chevrolet.`,
     createdAt: new Date().toISOString(),
   },
   {
     id: '2',
-    type: 'car',
-    brand: 'Toyota',
-    model: 'Corolla Altis',
-    year: 2021,
-    color: 'Branco',
-    plate: 'XYZ-5678',
-    vin: '9BR456...',
-    renavam: '987654321',
-    mileage: 22100,
-    fuel: 'Híbrido',
-    acquisitionPrice: 110000,
-    salePrice: 138500,
-    status: 'sold',
-    images: ['https://picsum.photos/seed/corolla/400/300'],
+    type: 'motorcycle',
+    brand: 'Suzuki',
+    model: 'GSX-R 750',
+    year: 2008,
+    color: 'Azul',
+    plate: 'JPN-2B34',
+    vin: 'JS1GR7MA082345678',
+    renavam: '10987654321',
+    mileage: 18500,
+    fuel: 'Gasolina',
+    acquisitionPrice: 30000,
+    salePrice: 36900,
+    status: 'available',
+    images: ['https://picsum.photos/seed/gsxr750/800/600'],
+    inspectionNotes: `SUZUKI GSX-R 750 2008 — Bruta de verdade. Moto icônica, potência, velocidade e presença. Cor azul clássica e chamativa.`,
     createdAt: new Date().toISOString(),
   },
   {
     id: '3',
     type: 'car',
-    brand: 'BMW',
-    model: '320i M Sport',
-    year: 2023,
+    brand: 'Volkswagen',
+    model: 'Gol 1.0',
+    year: 2013,
     color: 'Preto',
-    plate: 'BMW-0001',
-    vin: 'WBA789...',
-    renavam: '456789123',
-    mileage: 5200,
-    fuel: 'Gasolina',
-    acquisitionPrice: 280000,
-    salePrice: 315000,
+    plate: 'JPN-3C45',
+    vin: '9BWZZZ377DT123456',
+    renavam: '11223344556',
+    mileage: 95000,
+    fuel: 'Flex',
+    acquisitionPrice: 28000,
+    salePrice: 34900,
     status: 'available',
-    images: ['https://picsum.photos/seed/bmw/400/300'],
+    images: ['https://picsum.photos/seed/gol2013/800/600'],
+    inspectionNotes: `Volkswagen Gol 1.0 2013 Completo — Econômico e muito conservado. Preto, bem cuidado; ideal para economia, confiabilidade e baixo custo de manutenção. Motor 1.0 econômico.`,
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: '4',
+    type: 'motorcycle',
+    brand: 'Honda',
+    model: 'Biz 125',
+    year: 2023,
+    color: 'Branca',
+    plate: 'JPN-4D56',
+    vin: '9C2KC0810PR123456',
+    renavam: '55443322110',
+    mileage: 1900,
+    fuel: 'Gasolina',
+    acquisitionPrice: 14500,
+    salePrice: 17900,
+    status: 'available',
+    images: ['https://picsum.photos/seed/biz125/800/600'],
+    inspectionNotes: `Honda Biz 125 2023 — Branca. Impecável, apenas 1.900 km rodados; praticamente zero km.`,
     createdAt: new Date().toISOString(),
   },
 ];
@@ -528,42 +553,44 @@ export const seedVehicles: Vehicle[] = [
 export const seedClients: Client[] = [
   {
     id: '1',
-    name: 'Ricardo Silva',
-    status: 'vip',
-    birthDate: '1985-05-15',
-    cpf: '123.456.789-00',
+    name: 'Marcos Henrique Alves',
+    status: 'active',
+    birthDate: '1988-03-12',
+    cpf: '701.234.567-89',
     rg: '12.345.678-9',
-    email: 'ricardo.silva@email.com',
-    phone: '(11) 98765-4321',
-    whatsapp: '(11) 98765-4321',
+    email: 'marcos.alves@email.com',
+    phone: '(62) 98123-4567',
+    whatsapp: '(62) 98123-4567',
     address: {
-      zipCode: '01234-567',
-      street: 'Rua das Flores',
-      number: '456',
-      neighborhood: 'Jardim Paulista',
-      city: 'São Paulo',
-      state: 'SP',
+      zipCode: '74474-048',
+      street: 'Rua das Palmeiras',
+      number: '120',
+      neighborhood: 'Jardim Colorado',
+      city: 'Goiânia',
+      state: 'GO',
     },
+    notes: 'Cliente Japan Motors — região Jardim Colorado.',
     createdAt: new Date().toISOString(),
   },
   {
     id: '2',
-    name: 'Ana Oliveira',
-    status: 'active',
-    birthDate: '1992-08-22',
-    cpf: '987.654.321-11',
-    rg: '98.765.432-1',
-    email: 'ana.oliveira@email.com',
-    phone: '(11) 91234-5678',
-    whatsapp: '(11) 91234-5678',
+    name: 'Fernanda Costa Lima',
+    status: 'vip',
+    birthDate: '1995-11-28',
+    cpf: '529.876.543-21',
+    rg: '45.678.901-2',
+    email: 'fernanda.costa@email.com',
+    phone: '(62) 99234-5678',
+    whatsapp: '(62) 99234-5678',
     address: {
-      zipCode: '13000-000',
-      street: 'Av. Brasil',
-      number: '1000',
-      neighborhood: 'Centro',
-      city: 'Campinas',
-      state: 'SP',
+      zipCode: '74000-000',
+      street: 'Av. T-4',
+      number: '500',
+      neighborhood: 'Setor Bueno',
+      city: 'Goiânia',
+      state: 'GO',
     },
+    notes: 'Preferência por motos e carros populares.',
     createdAt: new Date().toISOString(),
   },
 ];
@@ -573,17 +600,17 @@ export const seedContracts: Contract[] = [
     id: 'CTR-001',
     type: 'sale',
     clientId: '1',
-    clientName: 'Ricardo Silva',
+    clientName: 'Marcos Henrique Alves',
     vehicleId: '1',
-    vehicleName: 'Honda Civic Touring',
+    vehicleName: 'Chevrolet Onix LT2 1.0',
     date: new Date().toISOString(),
-    totalValue: 145900,
-    downPayment: 45900,
-    balance: 100000,
-    paymentMethod: 'Financiamento 48x',
+    totalValue: 66900,
+    downPayment: 20000,
+    balance: 46900,
+    paymentMethod: 'Financiamento em 48x (simulação)',
     warrantyDays: 90,
     clauses: [],
-    status: 'completed',
+    status: 'active',
     createdAt: new Date().toISOString(),
   },
 ];

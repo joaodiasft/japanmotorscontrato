@@ -64,7 +64,7 @@ export default function Dashboard() {
     { label: 'Receita Total', value: new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(stats.totalRevenue), change: '+12.5%', icon: DollarSign, color: 'bg-emerald-50 text-emerald-600' },
     { label: 'Clientes Ativos', value: stats.activeClients.toString(), change: '+4.2%', icon: Users, color: 'bg-blue-50 text-blue-600' },
     { label: 'Carros em Estoque', value: stats.carCount.toString(), change: '-2.1%', icon: Car, color: 'bg-orange-50 text-orange-600' },
-    { label: 'Motos em Estoque', value: stats.motorcycleCount.toString(), change: '+5.4%', icon: Bike, color: 'bg-red-50 text-red-600' },
+    { label: 'Motos em Estoque', value: stats.motorcycleCount.toString(), change: '+5.4%', icon: Bike, color: 'bg-gray-100 text-neutral-800' },
   ];
 
   return (
@@ -72,7 +72,7 @@ export default function Dashboard() {
       <header className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
         <div>
           <h1 className="text-4xl font-black text-gray-900 tracking-tighter uppercase">Dashboard</h1>
-          <p className="text-gray-500 font-medium mt-1">Bem-vindo de volta! Aqui está o resumo da <span className="text-red-600 font-bold">Japan Motors</span> hoje.</p>
+          <p className="text-gray-500 font-medium mt-1">Bem-vindo de volta! Aqui está o resumo da <span className="text-neutral-800 font-bold">Japan Motors</span> hoje.</p>
         </div>
         <div className="text-right hidden md:block bg-white px-6 py-3 rounded-2xl border border-gray-100 shadow-sm">
           <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Data de Hoje</p>
@@ -99,7 +99,7 @@ export default function Dashboard() {
                 </div>
                 <div className={cn(
                   "flex items-center gap-1 text-xs font-black px-2 py-1 rounded-lg",
-                  stat.change.startsWith('+') ? "bg-emerald-50 text-emerald-600" : "bg-red-50 text-red-600"
+                  stat.change.startsWith('+') ? "bg-emerald-50 text-emerald-600" : "bg-gray-100 text-neutral-800"
                 )}>
                   {stat.change}
                   {stat.change.startsWith('+') ? <ArrowUpRight className="w-3 h-3" /> : <ArrowDownRight className="w-3 h-3" />}
@@ -121,7 +121,7 @@ export default function Dashboard() {
             <h2 className="text-xl font-bold text-gray-900">Transações Recentes</h2>
             <button 
               onClick={() => navigate('/contratos')}
-              className="text-sm font-bold text-red-600 hover:text-red-700 flex items-center gap-1"
+              className="text-sm font-bold text-neutral-800 hover:text-neutral-800 flex items-center gap-1"
             >
               Ver todas <ChevronRight className="w-4 h-4" />
             </button>
@@ -144,7 +144,7 @@ export default function Dashboard() {
                     <tr key={contract.id} className="hover:bg-gray-50 transition-colors cursor-pointer group" onClick={() => navigate(`/contratos/${contract.id}`)}>
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 rounded-full bg-red-50 flex items-center justify-center text-red-600 font-bold text-xs">
+                          <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-neutral-800 font-bold text-xs">
                             {(client?.name || 'C').charAt(0)}
                           </div>
                           <div className="font-bold text-gray-900">{client?.name || 'Cliente não encontrado'}</div>
@@ -187,14 +187,14 @@ export default function Dashboard() {
               <h2 className="text-xl font-bold text-gray-900">Destaques</h2>
               <button 
                 onClick={() => navigate('/estoque')}
-                className="text-sm font-bold text-red-600 hover:text-red-700"
+                className="text-sm font-bold text-neutral-800 hover:text-neutral-800"
               >
                 Ver estoque
               </button>
             </div>
             <div className="space-y-4">
               {featuredVehicles.map((vehicle) => (
-                <div key={vehicle.id} className="bg-white p-3 rounded-2xl border border-gray-100 flex gap-4 hover:border-red-200 transition-all cursor-pointer group" onClick={() => navigate('/estoque')}>
+                <div key={vehicle.id} className="bg-white p-3 rounded-2xl border border-gray-100 flex gap-4 hover:border-gray-200 transition-all cursor-pointer group" onClick={() => navigate('/estoque')}>
                   <div className="w-20 h-20 rounded-xl overflow-hidden bg-gray-100 flex-shrink-0">
                     <img 
                       src={vehicle.images[0] || `https://picsum.photos/seed/${vehicle.id}/200/200`} 
@@ -209,7 +209,7 @@ export default function Dashboard() {
                       <p className="text-xs text-gray-400 font-bold uppercase tracking-widest">{vehicle.year} • {vehicle.color}</p>
                     </div>
                     <div className="flex items-center justify-between">
-                      <span className="text-red-600 font-bold text-sm">
+                      <span className="text-neutral-800 font-bold text-sm">
                         {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(vehicle.salePrice || 0)}
                       </span>
                     </div>
@@ -229,7 +229,7 @@ export default function Dashboard() {
                   <span className="text-gray-900">12 / 15</span>
                 </div>
                 <div className="w-full h-2 bg-gray-100 rounded-full overflow-hidden">
-                  <div className="h-full bg-red-600 rounded-full" style={{ width: '80%' }} />
+                  <div className="h-full bg-neutral-900 rounded-full" style={{ width: '80%' }} />
                 </div>
               </div>
               <div>

@@ -24,6 +24,7 @@ import { storage } from '../services/storage';
 import { Contract, Client, Vehicle, SystemSettings } from '../types';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
+import { BRAND_LOGO_URL, BRAND_NAME } from '../config/brand';
 
 const replaceVariables = (content: string, data: Record<string, string>) => {
   let result = content;
@@ -257,7 +258,7 @@ export default function ContractView() {
               <select 
                 value={selectedTemplateId}
                 onChange={(e) => setSelectedTemplateId(e.target.value)}
-                className="text-sm border-gray-200 rounded-lg focus:ring-red-500 focus:border-red-500"
+                className="text-sm border-gray-200 rounded-lg focus:ring-neutral-500 focus:border-neutral-800"
               >
                 {settings.contractTemplates.map(t => (
                   <option key={t.id} value={t.id}>{t.name}</option>
@@ -287,28 +288,28 @@ export default function ContractView() {
           <div className="flex items-center gap-1">
             <button 
               onClick={() => setTextAlign('left')}
-              className={`p-2 rounded-lg transition-colors ${textAlign === 'left' ? 'bg-red-50 text-red-600' : 'text-gray-400 hover:bg-gray-50'}`}
+              className={`p-2 rounded-lg transition-colors ${textAlign === 'left' ? 'bg-gray-100 text-neutral-800' : 'text-gray-400 hover:bg-gray-50'}`}
               title="Alinhar à Esquerda"
             >
               <AlignLeft className="w-4 h-4" />
             </button>
             <button 
               onClick={() => setTextAlign('center')}
-              className={`p-2 rounded-lg transition-colors ${textAlign === 'center' ? 'bg-red-50 text-red-600' : 'text-gray-400 hover:bg-gray-50'}`}
+              className={`p-2 rounded-lg transition-colors ${textAlign === 'center' ? 'bg-gray-100 text-neutral-800' : 'text-gray-400 hover:bg-gray-50'}`}
               title="Centralizar"
             >
               <AlignCenter className="w-4 h-4" />
             </button>
             <button 
               onClick={() => setTextAlign('right')}
-              className={`p-2 rounded-lg transition-colors ${textAlign === 'right' ? 'bg-red-50 text-red-600' : 'text-gray-400 hover:bg-gray-50'}`}
+              className={`p-2 rounded-lg transition-colors ${textAlign === 'right' ? 'bg-gray-100 text-neutral-800' : 'text-gray-400 hover:bg-gray-50'}`}
               title="Alinhar à Direita"
             >
               <AlignRight className="w-4 h-4" />
             </button>
             <button 
               onClick={() => setTextAlign('justify')}
-              className={`p-2 rounded-lg transition-colors ${textAlign === 'justify' ? 'bg-red-50 text-red-600' : 'text-gray-400 hover:bg-gray-50'}`}
+              className={`p-2 rounded-lg transition-colors ${textAlign === 'justify' ? 'bg-gray-100 text-neutral-800' : 'text-gray-400 hover:bg-gray-50'}`}
               title="Justificar"
             >
               <AlignJustify className="w-4 h-4" />
@@ -325,7 +326,7 @@ export default function ContractView() {
               max="24" 
               value={fontSize}
               onChange={(e) => setFontSize(parseInt(e.target.value))}
-              className="w-32 accent-red-600"
+              className="w-32 accent-neutral-800"
             />
             <span className="text-xs font-mono text-gray-500 w-8">{fontSize}px</span>
           </div>
@@ -334,7 +335,7 @@ export default function ContractView() {
 
           <button 
             onClick={() => setIsBold(!isBold)}
-            className={`p-2 rounded-lg transition-colors flex items-center gap-2 ${isBold ? 'bg-red-50 text-red-600' : 'text-gray-400 hover:bg-gray-50'}`}
+            className={`p-2 rounded-lg transition-colors flex items-center gap-2 ${isBold ? 'bg-gray-100 text-neutral-800' : 'text-gray-400 hover:bg-gray-50'}`}
             title="Negrito"
           >
             <Bold className="w-4 h-4" />
@@ -346,7 +347,7 @@ export default function ContractView() {
           <div className="flex items-center gap-1 bg-gray-50 p-1 rounded-lg">
             <button 
               onClick={() => setPrintMode('color')}
-              className={`flex items-center gap-2 px-3 py-1.5 rounded-md text-xs font-medium transition-all ${printMode === 'color' ? 'bg-white text-red-600 shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}
+              className={`flex items-center gap-2 px-3 py-1.5 rounded-md text-xs font-medium transition-all ${printMode === 'color' ? 'bg-white text-neutral-800 shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}
             >
               <Palette className="w-3.5 h-3.5" />
               Colorido
@@ -369,24 +370,31 @@ export default function ContractView() {
         className="bg-white shadow-2xl rounded-none md:rounded-3xl border border-gray-100 overflow-hidden print:overflow-visible print:shadow-none print:border-none print:rounded-none"
       >
         {/* Document Header - Hidden in Print if template has its own */}
-        <div className="bg-brand-black p-12 text-white flex justify-between items-start print:hidden">
+        <div className="bg-white p-12 text-neutral-900 border-b border-gray-200 flex justify-between items-start print:hidden">
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-red-600 rounded-lg flex items-center justify-center font-bold text-2xl">J</div>
-              <h1 className="text-3xl font-bold tracking-tight">Japan Motors</h1>
+              <img
+                src={BRAND_LOGO_URL}
+                alt={BRAND_NAME}
+                className="h-12 w-auto object-contain"
+                referrerPolicy="no-referrer"
+              />
+              <h1 className="text-3xl font-bold tracking-tight">{settings.companyName || BRAND_NAME}</h1>
             </div>
-            <div className="space-y-1 text-gray-400 text-sm">
+            <div className="space-y-1 text-gray-500 text-sm">
               <p>{settings.address}</p>
               <p>CNPJ: {settings.cnpj}</p>
-              <p>Contato: {settings.phone} • {settings.email}</p>
+              <p>
+                Contato: {settings.phone} • {settings.email}
+              </p>
             </div>
           </div>
           <div className="text-right space-y-2">
-            <span className="inline-block px-4 py-1 bg-red-600 rounded-full text-xs font-bold uppercase tracking-widest">
+            <span className="inline-block px-4 py-1 bg-gray-100 border border-gray-200 rounded-full text-xs font-bold uppercase tracking-widest text-neutral-800">
               {template?.name || 'Contrato'}
             </span>
-            <p className="text-4xl font-mono font-bold">#{contract.id}</p>
-            <p className="text-gray-400 text-sm">Emitido em {format(new Date(contract.date), "dd 'de' MMMM 'de' yyyy", { locale: ptBR })}</p>
+            <p className="text-4xl font-mono font-bold text-neutral-900">#{contract.id}</p>
+            <p className="text-gray-500 text-sm">Emitido em {format(new Date(contract.date), "dd 'de' MMMM 'de' yyyy", { locale: ptBR })}</p>
           </div>
         </div>
 
@@ -414,7 +422,7 @@ export default function ContractView() {
       </motion.div>
 
       <style dangerouslySetInnerHTML={{ __html: `
-        .contract-content .contract-jv-root .cv-brand-logo {
+        .contract-content .contract-jv-root .cv-brand-logo:not(.cv-brand-logo--color) {
           filter: invert(1) brightness(0.35) contrast(1.1);
         }
         .contract-content .contract-jv-root .cv-print-only-break {
@@ -497,7 +505,7 @@ export default function ContractView() {
             page-break-after: always !important;
           }
           /* Logo PNG com fundo preto: inverte para cinza escuro legível no papel branco */
-          .contract-content .contract-jv-root .cv-brand-logo {
+          .contract-content .contract-jv-root .cv-brand-logo:not(.cv-brand-logo--color) {
             filter: invert(1) brightness(0.35) contrast(1.1) !important;
           }
           .contract-content .contract-jv-root table {

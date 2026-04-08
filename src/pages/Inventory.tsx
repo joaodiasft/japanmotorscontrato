@@ -118,7 +118,7 @@ export default function Inventory() {
           <h1 className="text-4xl font-black text-gray-900 tracking-tighter uppercase">Estoque</h1>
           <p className="text-gray-500 font-medium mt-1">Gerencie os veículos disponíveis e registrados no sistema.</p>
         </div>
-        <button onClick={() => setIsModalOpen(true)} className="btn-primary shadow-lg shadow-red-600/20 px-8">
+        <button onClick={() => setIsModalOpen(true)} className="btn-primary shadow-lg shadow-neutral-900/15 px-8">
           <Plus className="w-5 h-5" />
           Novo Veículo
         </button>
@@ -159,7 +159,7 @@ export default function Inventory() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   {/* Technical Data */}
                   <div className="space-y-6">
-                    <h3 className="text-xs font-bold text-red-600 uppercase tracking-widest flex items-center gap-2">
+                    <h3 className="text-xs font-bold text-neutral-800 uppercase tracking-widest flex items-center gap-2">
                       {newVehicle.type === 'motorcycle' ? <Bike className="w-4 h-4" /> : <Car className="w-4 h-4" />}
                       Dados Técnicos
                     </h3>
@@ -172,7 +172,7 @@ export default function Inventory() {
                             onClick={() => setNewVehicle({ ...newVehicle, type: 'car' })}
                             className={cn(
                               "flex-1 flex items-center justify-center gap-2 py-2 rounded-lg text-sm font-bold transition-all",
-                              newVehicle.type === 'car' ? "bg-white shadow-sm text-red-600" : "text-gray-500 hover:text-gray-900"
+                              newVehicle.type === 'car' ? "bg-white shadow-sm text-neutral-800" : "text-gray-500 hover:text-gray-900"
                             )}
                           >
                             <Car className="w-4 h-4" />
@@ -183,7 +183,7 @@ export default function Inventory() {
                             onClick={() => setNewVehicle({ ...newVehicle, type: 'motorcycle' })}
                             className={cn(
                               "flex-1 flex items-center justify-center gap-2 py-2 rounded-lg text-sm font-bold transition-all",
-                              newVehicle.type === 'motorcycle' ? "bg-white shadow-sm text-red-600" : "text-gray-500 hover:text-gray-900"
+                              newVehicle.type === 'motorcycle' ? "bg-white shadow-sm text-neutral-800" : "text-gray-500 hover:text-gray-900"
                             )}
                           >
                             <Bike className="w-4 h-4" />
@@ -293,7 +293,7 @@ export default function Inventory() {
 
                   {/* Financial & Photos */}
                   <div className="space-y-6">
-                    <h3 className="text-xs font-bold text-red-600 uppercase tracking-widest flex items-center gap-2">
+                    <h3 className="text-xs font-bold text-neutral-800 uppercase tracking-widest flex items-center gap-2">
                       <DollarSign className="w-4 h-4" />
                       Financeiro & Fotos
                     </h3>
@@ -327,7 +327,7 @@ export default function Inventory() {
                       
                       <div className="space-y-1">
                         <label className="label">Fotos do Veículo</label>
-                        <div className="border-2 border-dashed border-gray-200 rounded-2xl p-8 flex flex-col items-center justify-center gap-2 hover:border-red-200 hover:bg-red-50/30 transition-all cursor-pointer">
+                        <div className="border-2 border-dashed border-gray-200 rounded-2xl p-8 flex flex-col items-center justify-center gap-2 hover:border-gray-200 hover:bg-gray-100/30 transition-all cursor-pointer">
                           <Upload className="w-8 h-8 text-gray-300" />
                           <p className="text-sm font-medium text-gray-500">Clique ou arraste fotos aqui</p>
                           <p className="text-xs text-gray-400">PNG, JPG até 10MB</p>
@@ -339,7 +339,7 @@ export default function Inventory() {
 
                 {/* Inspection Notes */}
                 <div className="space-y-4">
-                  <h3 className="text-xs font-bold text-red-600 uppercase tracking-widest">Observações de Vistoria</h3>
+                  <h3 className="text-xs font-bold text-neutral-800 uppercase tracking-widest">Observações de Vistoria</h3>
                   <textarea 
                     className="input-field min-h-[100px] resize-none" 
                     placeholder="Descreva o estado geral do veículo, avarias ou itens a serem revisados..."
@@ -375,7 +375,7 @@ export default function Inventory() {
             onClick={() => setActiveCategory('all')}
             className={cn(
               "flex-1 md:px-6 py-2 rounded-lg text-sm font-bold transition-all flex items-center justify-center gap-2",
-              activeCategory === 'all' ? "bg-white shadow-sm text-red-600" : "text-gray-500 hover:text-gray-900"
+              activeCategory === 'all' ? "bg-white shadow-sm text-neutral-800" : "text-gray-500 hover:text-gray-900"
             )}
           >
             Todos
@@ -384,7 +384,7 @@ export default function Inventory() {
             onClick={() => setActiveCategory('car')}
             className={cn(
               "flex-1 md:px-6 py-2 rounded-lg text-sm font-bold transition-all flex items-center justify-center gap-2",
-              activeCategory === 'car' ? "bg-white shadow-sm text-red-600" : "text-gray-500 hover:text-gray-900"
+              activeCategory === 'car' ? "bg-white shadow-sm text-neutral-800" : "text-gray-500 hover:text-gray-900"
             )}
           >
             <Car className="w-4 h-4" />
@@ -394,7 +394,7 @@ export default function Inventory() {
             onClick={() => setActiveCategory('motorcycle')}
             className={cn(
               "flex-1 md:px-6 py-2 rounded-lg text-sm font-bold transition-all flex items-center justify-center gap-2",
-              activeCategory === 'motorcycle' ? "bg-white shadow-sm text-red-600" : "text-gray-500 hover:text-gray-900"
+              activeCategory === 'motorcycle' ? "bg-white shadow-sm text-neutral-800" : "text-gray-500 hover:text-gray-900"
             )}
           >
             <Bike className="w-4 h-4" />
@@ -407,7 +407,7 @@ export default function Inventory() {
           <input 
             type="text" 
             placeholder="Buscar por modelo, placa ou chassi..." 
-            className="w-full pl-10 pr-4 py-2 rounded-xl border border-gray-100 bg-gray-50 focus:bg-white focus:border-red-600 outline-none transition-all"
+            className="w-full pl-10 pr-4 py-2 rounded-xl border border-gray-100 bg-gray-50 focus:bg-white focus:border-neutral-800 outline-none transition-all"
             value={searchTerm}
             onChange={e => setSearchTerm(e.target.value)}
           />
@@ -422,7 +422,7 @@ export default function Inventory() {
               onClick={() => setView('grid')}
               className={cn(
                 "p-2 rounded-lg transition-all",
-                view === 'grid' ? "bg-white shadow-sm text-red-600" : "text-gray-500 hover:text-gray-900"
+                view === 'grid' ? "bg-white shadow-sm text-neutral-800" : "text-gray-500 hover:text-gray-900"
               )}
             >
               <LayoutGrid className="w-4 h-4" />
@@ -431,7 +431,7 @@ export default function Inventory() {
               onClick={() => setView('list')}
               className={cn(
                 "p-2 rounded-lg transition-all",
-                view === 'list' ? "bg-white shadow-sm text-red-600" : "text-gray-500 hover:text-gray-900"
+                view === 'list' ? "bg-white shadow-sm text-neutral-800" : "text-gray-500 hover:text-gray-900"
               )}
             >
               <ListIcon className="w-4 h-4" />
@@ -449,7 +449,7 @@ export default function Inventory() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: index * 0.05 }}
-              className="card p-0 overflow-hidden group hover:border-red-200 transition-all flex flex-col"
+              className="card p-0 overflow-hidden group hover:border-gray-200 transition-all flex flex-col"
             >
               <div className="relative aspect-[4/3] overflow-hidden bg-gray-100">
                 <img 
@@ -474,8 +474,8 @@ export default function Inventory() {
                 <div>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      {vehicle.type === 'motorcycle' ? <Bike className="w-3 h-3 text-red-600" /> : <Car className="w-3 h-3 text-red-600" />}
-                      <span className="text-[10px] font-black text-red-600 uppercase tracking-widest">{vehicle.brand}</span>
+                      {vehicle.type === 'motorcycle' ? <Bike className="w-3 h-3 text-neutral-800" /> : <Car className="w-3 h-3 text-neutral-800" />}
+                      <span className="text-[10px] font-black text-neutral-800 uppercase tracking-widest">{vehicle.brand}</span>
                     </div>
                     <button className="p-1 hover:bg-gray-100 rounded-lg transition-colors">
                       <MoreVertical className="w-4 h-4 text-gray-400" />
@@ -510,7 +510,7 @@ export default function Inventory() {
                   <div className="flex gap-1">
                     <button 
                       onClick={() => navigate(`/contratos?vehicleId=${vehicle.id}`)}
-                      className="p-2 hover:bg-red-50 rounded-lg text-red-600 hover:text-red-700 transition-all flex items-center gap-1 text-xs font-bold"
+                      className="p-2 hover:bg-gray-100 rounded-lg text-neutral-800 hover:text-neutral-800 transition-all flex items-center gap-1 text-xs font-bold"
                       title="Vender este veículo"
                     >
                       <FileCode className="w-4 h-4" />
@@ -521,7 +521,7 @@ export default function Inventory() {
                     </button>
                     <button 
                       onClick={() => handleDelete(vehicle.id)}
-                      className="p-2 hover:bg-gray-100 rounded-lg text-gray-400 hover:text-red-600 transition-all"
+                      className="p-2 hover:bg-gray-100 rounded-lg text-gray-400 hover:text-neutral-800 transition-all"
                     >
                       <Trash2 className="w-4 h-4" />
                     </button>
@@ -595,7 +595,7 @@ export default function Inventory() {
                     <div className="flex justify-end gap-2">
                       <button 
                         onClick={() => navigate(`/contratos?vehicleId=${vehicle.id}`)}
-                        className="p-2 hover:bg-red-50 rounded-lg text-red-600 hover:text-red-700 transition-all flex items-center gap-1 text-xs font-bold"
+                        className="p-2 hover:bg-gray-100 rounded-lg text-neutral-800 hover:text-neutral-800 transition-all flex items-center gap-1 text-xs font-bold"
                         title="Vender este veículo"
                       >
                         <FileCode className="w-4 h-4" />
@@ -604,7 +604,7 @@ export default function Inventory() {
                       <button className="p-2 hover:bg-gray-100 rounded-lg text-gray-400 hover:text-gray-900 transition-all">
                         <Eye className="w-4 h-4" />
                       </button>
-                      <button className="p-2 hover:bg-gray-100 rounded-lg text-gray-400 hover:text-red-600 transition-all" onClick={() => handleDelete(vehicle.id)}>
+                      <button className="p-2 hover:bg-gray-100 rounded-lg text-gray-400 hover:text-neutral-800 transition-all" onClick={() => handleDelete(vehicle.id)}>
                         <Trash2 className="w-4 h-4" />
                       </button>
                     </div>

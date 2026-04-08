@@ -195,7 +195,7 @@ export default function Settings() {
 
   if (loadError) {
     return (
-      <div className="p-8 rounded-xl border border-red-200 bg-red-50 text-red-800">
+      <div className="p-8 rounded-xl border border-gray-200 bg-gray-100 text-neutral-800">
         <p className="font-medium">Não foi possível carregar as configurações.</p>
         <p className="text-sm mt-2">{loadError}</p>
         <p className="text-sm mt-2">Confirme se a API está rodando ({`npm run dev`} inicia Vite + servidor).</p>
@@ -224,7 +224,7 @@ export default function Settings() {
         <button
           onClick={() => setActiveTab('general')}
           className={`flex items-center space-x-2 px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-            activeTab === 'general' ? 'bg-white text-indigo-600 shadow-sm' : 'text-slate-600 hover:text-slate-900'
+            activeTab === 'general' ? 'bg-white text-neutral-800 shadow-sm' : 'text-slate-600 hover:text-slate-900'
           }`}
         >
           <Building2 className="w-4 h-4" />
@@ -233,7 +233,7 @@ export default function Settings() {
         <button
           onClick={() => setActiveTab('users')}
           className={`flex items-center space-x-2 px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-            activeTab === 'users' ? 'bg-white text-indigo-600 shadow-sm' : 'text-slate-600 hover:text-slate-900'
+            activeTab === 'users' ? 'bg-white text-neutral-800 shadow-sm' : 'text-slate-600 hover:text-slate-900'
           }`}
         >
           <Users className="w-4 h-4" />
@@ -242,7 +242,7 @@ export default function Settings() {
         <button
           onClick={() => setActiveTab('templates')}
           className={`flex items-center space-x-2 px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-            activeTab === 'templates' ? 'bg-white text-indigo-600 shadow-sm' : 'text-slate-600 hover:text-slate-900'
+            activeTab === 'templates' ? 'bg-white text-neutral-800 shadow-sm' : 'text-slate-600 hover:text-slate-900'
           }`}
         >
           <FileCode className="w-4 h-4" />
@@ -262,7 +262,7 @@ export default function Settings() {
                     type="text"
                     value={settings.companyName}
                     onChange={e => setSettings({ ...settings, companyName: e.target.value })}
-                    className="w-full pl-10 pr-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    className="w-full pl-10 pr-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-neutral-600"
                   />
                 </div>
               </div>
@@ -274,7 +274,7 @@ export default function Settings() {
                     type="text"
                     value={settings.cnpj}
                     onChange={e => setSettings({ ...settings, cnpj: e.target.value })}
-                    className="w-full pl-10 pr-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    className="w-full pl-10 pr-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-neutral-600"
                   />
                 </div>
               </div>
@@ -286,7 +286,7 @@ export default function Settings() {
                     type="email"
                     value={settings.email}
                     onChange={e => setSettings({ ...settings, email: e.target.value })}
-                    className="w-full pl-10 pr-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    className="w-full pl-10 pr-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-neutral-600"
                   />
                 </div>
               </div>
@@ -298,7 +298,7 @@ export default function Settings() {
                     type="text"
                     value={settings.phone}
                     onChange={e => setSettings({ ...settings, phone: e.target.value })}
-                    className="w-full pl-10 pr-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    className="w-full pl-10 pr-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-neutral-600"
                   />
                 </div>
               </div>
@@ -310,7 +310,7 @@ export default function Settings() {
                     type="text"
                     value={settings.address}
                     onChange={e => setSettings({ ...settings, address: e.target.value })}
-                    className="w-full pl-10 pr-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    className="w-full pl-10 pr-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-neutral-600"
                   />
                 </div>
               </div>
@@ -318,7 +318,7 @@ export default function Settings() {
             <div className="flex justify-end pt-4">
               <button
                 type="submit"
-                className="flex items-center space-x-2 px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
+                className="flex items-center space-x-2 px-6 py-2 bg-neutral-800 text-white rounded-lg hover:bg-neutral-900 transition-colors"
               >
                 <Save className="w-4 h-4" />
                 <span>Salvar Configurações</span>
@@ -336,7 +336,7 @@ export default function Settings() {
                   setEditingUser({});
                   setShowUserModal(true);
                 }}
-                className="flex items-center space-x-2 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
+                className="flex items-center space-x-2 px-4 py-2 bg-neutral-800 text-white rounded-lg hover:bg-neutral-900 transition-colors"
               >
                 <Plus className="w-4 h-4" />
                 <span>Novo Usuário</span>
@@ -370,13 +370,13 @@ export default function Settings() {
                             setEditingUser(user);
                             setShowUserModal(true);
                           }}
-                          className="p-2 text-slate-400 hover:text-indigo-600 transition-colors"
+                          className="p-2 text-slate-400 hover:text-neutral-800 transition-colors"
                         >
                           <FileText className="w-4 h-4" />
                         </button>
                         <button
                           onClick={() => handleDeleteUser(user.id)}
-                          className="p-2 text-slate-400 hover:text-red-600 transition-colors"
+                          className="p-2 text-slate-400 hover:text-neutral-800 transition-colors"
                         >
                           <Trash2 className="w-4 h-4" />
                         </button>
@@ -408,7 +408,7 @@ export default function Settings() {
                     setTemplateEditorMode('visual');
                     setShowTemplateModal(true);
                   }}
-                  className="flex items-center space-x-2 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
+                  className="flex items-center space-x-2 px-4 py-2 bg-neutral-800 text-white rounded-lg hover:bg-neutral-900 transition-colors"
                 >
                   <Plus className="w-4 h-4" />
                   <span>Novo Modelo</span>
@@ -417,10 +417,10 @@ export default function Settings() {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {settings.contractTemplates.map(template => (
-                <div key={template.id} className="p-4 border border-slate-200 rounded-xl hover:border-indigo-300 transition-all group">
+                <div key={template.id} className="p-4 border border-slate-200 rounded-xl hover:border-gray-300 transition-all group">
                   <div className="flex justify-between items-start mb-2">
                     <div className="flex items-center space-x-3">
-                      <div className="p-2 bg-indigo-50 rounded-lg text-indigo-600">
+                      <div className="p-2 bg-gray-100 rounded-lg text-neutral-800">
                         <FileText className="w-5 h-5" />
                       </div>
                       <h4 className="font-semibold text-slate-900">{template.name}</h4>
@@ -435,13 +435,13 @@ export default function Settings() {
                           );
                           setShowTemplateModal(true);
                         }}
-                        className="p-2 text-slate-400 hover:text-indigo-600"
+                        className="p-2 text-slate-400 hover:text-neutral-800"
                       >
                         <FileText className="w-4 h-4" />
                       </button>
                       <button
                         onClick={() => handleDeleteTemplate(template.id)}
-                        className="p-2 text-slate-400 hover:text-red-600"
+                        className="p-2 text-slate-400 hover:text-neutral-800"
                       >
                         <Trash2 className="w-4 h-4" />
                       </button>
@@ -481,7 +481,7 @@ export default function Settings() {
                   required
                   value={editingUser.name || ''}
                   onChange={e => setEditingUser({ ...editingUser, name: e.target.value })}
-                  className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-neutral-600"
                 />
               </div>
               <div className="space-y-1">
@@ -491,7 +491,7 @@ export default function Settings() {
                   required
                   value={editingUser.email || ''}
                   onChange={e => setEditingUser({ ...editingUser, email: e.target.value })}
-                  className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-neutral-600"
                 />
               </div>
               <div className="space-y-1">
@@ -499,7 +499,7 @@ export default function Settings() {
                 <select
                   value={editingUser.role || 'vendedor'}
                   onChange={e => setEditingUser({ ...editingUser, role: e.target.value as any })}
-                  className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-neutral-600"
                 >
                   <option value="vendedor">Vendedor</option>
                   <option value="admin">Administrador</option>
@@ -515,7 +515,7 @@ export default function Settings() {
                 </button>
                 <button
                   type="submit"
-                  className="flex-1 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
+                  className="flex-1 px-4 py-2 bg-neutral-800 text-white rounded-lg hover:bg-neutral-900 transition-colors"
                 >
                   Salvar
                 </button>
@@ -556,7 +556,7 @@ export default function Settings() {
                   required
                   value={editingTemplate.name || ''}
                   onChange={e => setEditingTemplate({ ...editingTemplate, name: e.target.value })}
-                  className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-neutral-600"
                   placeholder="Ex: Contrato de Venda à Vista"
                 />
               </div>
@@ -581,8 +581,8 @@ export default function Settings() {
                     }}
                     className={`px-3 py-1 text-xs font-medium rounded-lg border ${
                       templateEditorMode === 'visual'
-                        ? 'bg-indigo-600 text-white border-indigo-600'
-                        : 'bg-white text-slate-600 border-slate-200 hover:border-indigo-300'
+                        ? 'bg-neutral-800 text-white border-neutral-800'
+                        : 'bg-white text-slate-600 border-slate-200 hover:border-gray-300'
                     }`}
                   >
                     Visual (Quill)
@@ -592,8 +592,8 @@ export default function Settings() {
                     onClick={() => setTemplateEditorMode('html')}
                     className={`px-3 py-1 text-xs font-medium rounded-lg border ${
                       templateEditorMode === 'html'
-                        ? 'bg-indigo-600 text-white border-indigo-600'
-                        : 'bg-white text-slate-600 border-slate-200 hover:border-indigo-300'
+                        ? 'bg-neutral-800 text-white border-neutral-800'
+                        : 'bg-white text-slate-600 border-slate-200 hover:border-gray-300'
                     }`}
                   >
                     HTML (colar modelo)
@@ -610,7 +610,7 @@ export default function Settings() {
                       key={variable.value}
                       type="button"
                       onClick={() => insertVariable(variable.value)}
-                      className="px-2 py-1 text-[10px] font-medium bg-white border border-slate-200 rounded hover:border-indigo-500 hover:text-indigo-600 transition-colors"
+                      className="px-2 py-1 text-[10px] font-medium bg-white border border-slate-200 rounded hover:border-neutral-600 hover:text-neutral-800 transition-colors"
                     >
                       {variable.label}
                     </button>
@@ -619,7 +619,7 @@ export default function Settings() {
 
                 {templateEditorMode === 'html' ? (
                   <textarea
-                    className="w-full h-[28rem] font-mono text-xs border border-slate-200 rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none"
+                    className="w-full h-[28rem] font-mono text-xs border border-slate-200 rounded-lg p-3 focus:ring-2 focus:ring-neutral-600 focus:border-neutral-600 outline-none"
                     value={editingTemplate.content || ''}
                     onChange={(e) =>
                       setEditingTemplate({ ...editingTemplate, content: e.target.value })
@@ -660,7 +660,7 @@ export default function Settings() {
                 </button>
                 <button
                   type="submit"
-                  className="flex-1 px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
+                  className="flex-1 px-6 py-2 bg-neutral-800 text-white rounded-lg hover:bg-neutral-900 transition-colors"
                 >
                   Salvar Modelo
                 </button>
