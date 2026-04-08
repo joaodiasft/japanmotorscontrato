@@ -10,6 +10,7 @@ import {
   toVehicle,
   mergeContractTemplatesWithDefaults,
   contractTemplatesNeedDbUpdate,
+  normalizeContractTemplates,
 } from './mappers';
 import {
   getDefaultSystemSettings,
@@ -290,18 +291,20 @@ app.get('/api/settings', async (_req, res) => {
     row.contractTemplates,
     defaults.contractTemplates,
   );
-  if (contractTemplatesNeedDbUpdate(row.contractTemplates, merged)) {
+  const normalized = normalizeContractTemplates(merged);
+  if (contractTemplatesNeedDbUpdate(row.contractTemplates, normalized)) {
     const updated = await prisma.systemSettings.update({
       where: { id: 1 },
-      data: { contractTemplates: merged as object },
+      data: { contractTemplates: normalized as object },
     });
     return res.json(toSystemSettings(updated));
   }
-  res.json({ ...toSystemSettings(row), contractTemplates: merged });
+  res.json({ ...toSystemSettings(row), contractTemplates: normalized });
 });
 
 app.put('/api/settings', async (req, res) => {
   const body = req.body as SystemSettings;
+  const templates = normalizeContractTemplates(body.contractTemplates ?? []);
   const row = await prisma.systemSettings.upsert({
     where: { id: 1 },
     create: {
@@ -311,7 +314,7 @@ app.put('/api/settings', async (req, res) => {
       address: body.address,
       phone: body.phone,
       email: body.email,
-      contractTemplates: body.contractTemplates as object,
+      contractTemplates: templates as object,
     },
     update: {
       companyName: body.companyName,
@@ -319,7 +322,7 @@ app.put('/api/settings', async (req, res) => {
       address: body.address,
       phone: body.phone,
       email: body.email,
-      contractTemplates: body.contractTemplates as object,
+      contractTemplates: templates as object,
     },
   });
   res.json(toSystemSettings(row));

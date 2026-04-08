@@ -19,6 +19,11 @@ import ReactQuill from 'react-quill-new';
 import 'react-quill-new/dist/quill.snow.css';
 import { storage } from '../services/storage';
 import { User, SystemSettings, ContractTemplate } from '../types';
+import {
+  contractContentNeedsHtmlMode,
+  contractTemplatePlainPreview,
+  normalizeContractTemplateHtml,
+} from '../utils/contractTemplateHtml';
 
 const Quill = ReactQuill as any;
 
@@ -49,6 +54,7 @@ export default function Settings() {
   const [editingUser, setEditingUser] = useState<Partial<User>>({});
   const [showTemplateModal, setShowTemplateModal] = useState(false);
   const [editingTemplate, setEditingTemplate] = useState<Partial<ContractTemplate>>({});
+  const [templateEditorMode, setTemplateEditorMode] = useState<'visual' | 'html'>('visual');
   const quillRef = React.useRef<any>(null);
 
   const AVAILABLE_VARIABLES = [
@@ -95,6 +101,13 @@ export default function Settings() {
   ];
 
   const insertVariable = (variable: string) => {
+    if (templateEditorMode === 'html') {
+      setEditingTemplate({
+        ...editingTemplate,
+        content: (editingTemplate.content || '') + variable,
+      });
+      return;
+    }
     if (quillRef.current) {
       const quill = quillRef.current.getEditor();
       const range = quill.getSelection();
@@ -141,7 +154,7 @@ export default function Settings() {
     const newTemplate: ContractTemplate = {
       id: editingTemplate.id || Math.random().toString(36).substr(2, 9),
       name: editingTemplate.name || '',
-      content: editingTemplate.content || '',
+      content: normalizeContractTemplateHtml(editingTemplate.content || ''),
     };
 
     const updatedTemplates = [...settings.contractTemplates];
@@ -392,6 +405,7 @@ export default function Settings() {
                 <button
                   onClick={() => {
                     setEditingTemplate({});
+                    setTemplateEditorMode('visual');
                     setShowTemplateModal(true);
                   }}
                   className="flex items-center space-x-2 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
@@ -414,7 +428,11 @@ export default function Settings() {
                     <div className="flex space-x-1 opacity-0 group-hover:opacity-100 transition-opacity">
                       <button
                         onClick={() => {
-                          setEditingTemplate(template);
+                          const norm = normalizeContractTemplateHtml(template.content || '');
+                          setEditingTemplate({ ...template, content: norm });
+                          setTemplateEditorMode(
+                            contractContentNeedsHtmlMode(template.content || '') ? 'html' : 'visual',
+                          );
                           setShowTemplateModal(true);
                         }}
                         className="p-2 text-slate-400 hover:text-indigo-600"
@@ -430,7 +448,7 @@ export default function Settings() {
                     </div>
                   </div>
                   <p className="text-sm text-slate-500 line-clamp-2">
-                    {template.content.substring(0, 150)}...
+                    {contractTemplatePlainPreview(template.content || '', 180)}
                   </p>
                 </div>
               ))}
@@ -519,7 +537,14 @@ export default function Settings() {
               <h2 className="text-xl font-bold text-slate-900">
                 {editingTemplate.id ? 'Editar Modelo' : 'Novo Modelo de Contrato'}
               </h2>
-              <button onClick={() => setShowTemplateModal(false)} className="text-slate-400 hover:text-slate-600">
+              <button
+                type="button"
+                onClick={() => {
+                  setShowTemplateModal(false);
+                  setTemplateEditorMode('visual');
+                }}
+                className="text-slate-400 hover:text-slate-600"
+              >
                 <Trash2 className="w-5 h-5" />
               </button>
             </div>
@@ -541,6 +566,44 @@ export default function Settings() {
                   <span className="text-xs text-slate-400">Use as tags abaixo para preenchimento automático</span>
                 </div>
                 
+                <div className="flex flex-wrap items-center gap-2 mb-2">
+                  <span className="text-xs text-slate-500">Edição:</span>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (templateEditorMode === 'html') {
+                        setEditingTemplate({
+                          ...editingTemplate,
+                          content: normalizeContractTemplateHtml(editingTemplate.content || ''),
+                        });
+                      }
+                      setTemplateEditorMode('visual');
+                    }}
+                    className={`px-3 py-1 text-xs font-medium rounded-lg border ${
+                      templateEditorMode === 'visual'
+                        ? 'bg-indigo-600 text-white border-indigo-600'
+                        : 'bg-white text-slate-600 border-slate-200 hover:border-indigo-300'
+                    }`}
+                  >
+                    Visual (Quill)
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setTemplateEditorMode('html')}
+                    className={`px-3 py-1 text-xs font-medium rounded-lg border ${
+                      templateEditorMode === 'html'
+                        ? 'bg-indigo-600 text-white border-indigo-600'
+                        : 'bg-white text-slate-600 border-slate-200 hover:border-indigo-300'
+                    }`}
+                  >
+                    HTML (colar modelo)
+                  </button>
+                </div>
+                <p className="text-xs text-slate-500 mb-2">
+                  Se você colou uma página inteira (&lt;!DOCTYPE&gt;, &lt;html&gt;…) no editor visual, o texto virou código escapado.
+                  Use <strong>HTML (colar modelo)</strong> para colar o contrato, ou salve de novo: o servidor tenta corrigir automaticamente.
+                </p>
+
                 <div className="flex flex-wrap gap-2 mb-2 p-2 bg-slate-50 rounded-lg border border-slate-200">
                   {AVAILABLE_VARIABLES.map(variable => (
                     <button
@@ -554,28 +617,43 @@ export default function Settings() {
                   ))}
                 </div>
 
-                <div className="h-96 mb-12">
-                  <Quill
-                    ref={quillRef}
-                    theme="snow"
+                {templateEditorMode === 'html' ? (
+                  <textarea
+                    className="w-full h-[28rem] font-mono text-xs border border-slate-200 rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none"
                     value={editingTemplate.content || ''}
-                    onChange={(content: string) => setEditingTemplate({ ...editingTemplate, content })}
-                    className="h-full"
-                    modules={{
-                      toolbar: [
-                        [{ 'header': [1, 2, 3, false] }],
-                        ['bold', 'italic', 'underline', 'strike'],
-                        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-                        ['clean']
-                      ],
-                    }}
+                    onChange={(e) =>
+                      setEditingTemplate({ ...editingTemplate, content: e.target.value })
+                    }
+                    spellCheck={false}
+                    placeholder="Cole aqui apenas o miolo do contrato em HTML (tags &lt;p&gt;, &lt;div&gt;, etc.). Variáveis: {{clientName}}, {{totalValue}}, …"
                   />
-                </div>
+                ) : (
+                  <div className="h-96 mb-12" key={`quill-${editingTemplate.id || 'new'}`}>
+                    <Quill
+                      ref={quillRef}
+                      theme="snow"
+                      value={editingTemplate.content || ''}
+                      onChange={(content: string) => setEditingTemplate({ ...editingTemplate, content })}
+                      className="h-full"
+                      modules={{
+                        toolbar: [
+                          [{ header: [1, 2, 3, false] }],
+                          ['bold', 'italic', 'underline', 'strike'],
+                          [{ list: 'ordered' }, { list: 'bullet' }],
+                          ['clean'],
+                        ],
+                      }}
+                    />
+                  </div>
+                )}
               </div>
               <div className="flex space-x-3 pt-4">
                 <button
                   type="button"
-                  onClick={() => setShowTemplateModal(false)}
+                  onClick={() => {
+                    setShowTemplateModal(false);
+                    setTemplateEditorMode('visual');
+                  }}
                   className="px-6 py-2 border border-slate-200 text-slate-600 rounded-lg hover:bg-slate-50 transition-colors"
                 >
                   Cancelar

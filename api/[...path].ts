@@ -61,6 +61,7 @@ export default async function handler(req: any, res: any) {
         toSystemSettings,
         mergeContractTemplatesWithDefaults,
         contractTemplatesNeedDbUpdate,
+        normalizeContractTemplates,
       } = await import('../server/mappers.js');
       const { getDefaultSystemSettings } = await import('../server/seed-data.js');
 
@@ -88,18 +89,20 @@ export default async function handler(req: any, res: any) {
             row.contractTemplates,
             defaults.contractTemplates,
           );
-          if (contractTemplatesNeedDbUpdate(row.contractTemplates, merged)) {
+          const normalized = normalizeContractTemplates(merged);
+          if (contractTemplatesNeedDbUpdate(row.contractTemplates, normalized)) {
             const updated = await prisma.systemSettings.update({
               where: { id: 1 },
-              data: { contractTemplates: merged as any },
+              data: { contractTemplates: normalized as any },
             });
             return jsonResponse(res, 200, toSystemSettings(updated));
           }
-          return jsonResponse(res, 200, { ...toSystemSettings(row), contractTemplates: merged });
+          return jsonResponse(res, 200, { ...toSystemSettings(row), contractTemplates: normalized });
         }
 
         if (req.method === 'PUT') {
           const body = readJsonBody(req) as Partial<SystemSettings> & { contractTemplates?: any };
+          const templates = normalizeContractTemplates(body.contractTemplates ?? []);
           const updated = await prisma.systemSettings.upsert({
             where: { id: 1 },
             create: {
@@ -109,7 +112,7 @@ export default async function handler(req: any, res: any) {
               address: body.address as any,
               phone: body.phone,
               email: body.email,
-              contractTemplates: body.contractTemplates as any,
+              contractTemplates: templates as any,
             },
             update: {
               companyName: body.companyName,
@@ -117,7 +120,7 @@ export default async function handler(req: any, res: any) {
               address: body.address as any,
               phone: body.phone,
               email: body.email,
-              contractTemplates: body.contractTemplates as any,
+              contractTemplates: templates as any,
             },
           });
           return jsonResponse(res, 200, toSystemSettings(updated));

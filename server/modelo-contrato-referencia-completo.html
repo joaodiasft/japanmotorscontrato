@@ -1,0 +1,232 @@
+<!-- Referência: copie o conteúdo deste arquivo (a partir da tag <div class="contract-jv-root">) e cole em Configurações → Modelos → HTML (colar modelo). Não use <!DOCTYPE> nem <html>. Variáveis {{...}} são preenchidas pelo sistema. -->
+<div class="contract-jv-root cv-doc" style="color: #1a1a1a; font-size: 10pt; line-height: 1.42; max-width: 100%; margin: 0 auto; font-family: ui-sans-serif, system-ui, 'Segoe UI', Arial, sans-serif;">
+  <style type="text/css">
+    .cv-doc .cv-letterhead { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; padding-bottom: 12px; margin-bottom: 16px; border-bottom: 2px solid #c41230; }
+    .cv-doc .cv-letterhead-meta { text-align: right; font-size: 8.5pt; line-height: 1.45; color: #374151; max-width: 65%; }
+    .cv-doc .cv-title { text-align: center; font-size: 16pt; font-weight: 800; letter-spacing: 0.06em; margin: 4px 0 16px; color: #111; }
+    .cv-doc .cv-section { margin: 14px 0 8px; font-size: 9.5pt; font-weight: 700; color: #111; text-transform: uppercase; letter-spacing: 0.04em; display: flex; align-items: center; gap: 8px; border-left: 3px solid #c41230; padding-left: 10px; }
+    .cv-doc .cv-section-num { display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; border-radius: 50%; background: #f3f4f6; font-size: 8pt; font-weight: 800; color: #c41230; flex-shrink: 0; }
+    .cv-doc .cv-intro { text-align: justify; margin: 0 0 14px; font-size: 10pt; color: #374151; }
+    .cv-doc .cv-block { text-align: justify; margin: 0 0 12px; font-size: 10pt; }
+    .cv-doc .cv-form-table { width: 100%; border-collapse: collapse; table-layout: fixed; font-family: 'Consolas', 'Courier New', monospace; font-size: 9.5pt; margin: 4px 0 10px; }
+    .cv-doc .cv-form-table td { padding: 3px 0 4px 0; vertical-align: bottom; }
+    .cv-doc .cv-form-table .cv-fl { white-space: nowrap; width: 140px; max-width: 32%; color: #111; font-weight: 600; padding-right: 10px; vertical-align: bottom; }
+    .cv-doc .cv-form-table .cv-val { border-bottom: 1px dotted #6b7280; color: #111; word-break: break-word; width: auto; }
+    /* Uma única quebra entre folhas (evita página em branco por break-before + break-after) */
+    .cv-doc .cv-print-only-break { display: none; }
+    @media print {
+      .cv-doc .cv-print-only-break {
+        display: block;
+        height: 0;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        border: 0;
+        break-after: page;
+        page-break-after: always;
+      }
+    }
+    .cv-doc .cv-price { width: 100%; border-collapse: collapse; font-size: 9.5pt; border: 1px solid #111; margin: 8px 0 14px; font-family: 'Consolas', 'Courier New', monospace; }
+    .cv-doc .cv-price th, .cv-doc .cv-price td { border: 1px solid #111; padding: 8px 10px; text-align: left; }
+    .cv-doc .cv-price th { background: #f9fafb; font-family: ui-sans-serif, system-ui, sans-serif; font-size: 8.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; }
+    .cv-doc .cv-price td:nth-child(2) { text-align: right; white-space: nowrap; width: 96px; }
+    .cv-doc .cv-price .cv-total { font-weight: 800; }
+    .cv-doc .cv-clauses p { text-align: justify; margin: 0 0 10px; font-size: 9.75pt; color: #374151; }
+    .cv-doc .cv-h2 { text-align: center; font-size: 12pt; font-weight: 800; margin: 0 0 14px; letter-spacing: 0.04em; color: #111; }
+    .cv-doc .cv-sub { font-size: 9.5pt; font-weight: 700; margin: 12px 0 6px; color: #111; }
+    .cv-doc .cv-g1 { text-align: justify; font-size: 9.25pt; line-height: 1.38; color: #4b5563; }
+    .cv-doc .cv-footer-line { text-align: center; margin-top: 18px; font-size: 10pt; font-weight: 500; color: #111; }
+    .cv-doc .cv-signatures { margin-top: 28px; padding-top: 20px; border-top: 1px solid #d1d5db; break-inside: avoid; page-break-inside: avoid; }
+    .cv-doc .cv-sig-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px 48px; font-size: 9.5pt; }
+    .cv-doc .cv-sig-box { text-align: center; }
+    .cv-doc .cv-sig-line { height: 44px; border-bottom: 1px solid #111; margin-bottom: 10px; }
+    .cv-doc .cv-sig-name { font-weight: 700; text-transform: uppercase; font-size: 9pt; letter-spacing: 0.02em; }
+    .cv-doc .cv-sig-meta { margin-top: 6px; font-size: 8.75pt; color: #4b5563; }
+  </style>
+
+  <!-- FOLHA 1 -->
+  <section class="cv-sheet">
+    <header class="cv-letterhead">
+      <img src="/logo-contrato.png" class="cv-brand-logo" alt="Japan Motors" style="height: 50px; width: auto; object-fit: contain; display: block; flex-shrink: 0;" />
+      <div class="cv-letterhead-meta">
+        <div>{{companyAddress}}</div>
+        <div>CNPJ: {{companyCnpj}}</div>
+        <div>Tel.: {{companyPhone}}</div>
+      </div>
+    </header>
+
+    <h1 class="cv-title">CONTRATO DE COMPRA E VENDA DE VEÍCULO USADO</h1>
+
+    <p class="cv-intro">
+      Pelo presente instrumento particular de compra e venda, têm entre si, justo e contratado, a <strong>VENDEDORA</strong> e o <strong>COMPRADOR</strong>, qualificados neste ato, o presente contrato de venda de veículo automotor usado, regido pelas cláusulas e condições adiante estabelecidas, obrigando-se mutuamente, por si, herdeiros e sucessores, ao fiel cumprimento.
+    </p>
+
+    <div class="cv-section"><span class="cv-section-num">A</span> VENDEDORA</div>
+    <p class="cv-block">
+      <strong>{{companyName}}</strong>, pessoa jurídica de direito privado, com sede em <strong>{{companyAddress}}</strong>, inscrita no CNPJ sob o nº <strong>{{companyCnpj}}</strong>, telefone <strong>{{companyPhone}}</strong>.
+    </p>
+
+    <div class="cv-section"><span class="cv-section-num">B</span> COMPRADOR</div>
+    <table class="cv-form-table" role="presentation">
+      <tr><td class="cv-fl">Nome</td><td class="cv-val">{{clientName}}</td></tr>
+      <tr><td class="cv-fl">Endereço</td><td class="cv-val">{{clientStreetLine}}</td></tr>
+      <tr><td class="cv-fl">Bairro</td><td class="cv-val">{{clientNeighborhood}}</td></tr>
+      <tr><td class="cv-fl">Cidade - UF</td><td class="cv-val">{{clientCityState}}</td></tr>
+      <tr><td class="cv-fl">CEP</td><td class="cv-val">{{clientZipCode}}</td></tr>
+      <tr><td class="cv-fl">Identidade</td><td class="cv-val">{{clientRg}}</td></tr>
+      <tr><td class="cv-fl">CPF</td><td class="cv-val">{{clientCpf}}</td></tr>
+      <tr><td class="cv-fl">Telefone(s)</td><td class="cv-val">{{clientPhone}}</td></tr>
+    </table>
+
+    <div class="cv-section"><span class="cv-section-num">C</span> OBJETO DO CONTRATO</div>
+    <table class="cv-form-table" role="presentation">
+      <tr><td class="cv-fl">Veículo</td><td class="cv-val">{{vehicleBrand}} {{vehicleModel}}</td></tr>
+      <tr><td class="cv-fl">Cor</td><td class="cv-val">{{vehicleColor}}</td></tr>
+      <tr><td class="cv-fl">Combustível</td><td class="cv-val">{{vehicleFuel}}</td></tr>
+      <tr><td class="cv-fl">Placa</td><td class="cv-val">{{vehiclePlate}}</td></tr>
+      <tr><td class="cv-fl">Chassi</td><td class="cv-val">{{vehicleVin}}</td></tr>
+      <tr><td class="cv-fl">Renavam</td><td class="cv-val">{{vehicleRenavam}}</td></tr>
+      <tr><td class="cv-fl">Ano Fab. / Mod.</td><td class="cv-val">{{vehicleYearFabMod}}</td></tr>
+      <tr><td class="cv-fl">Quilometragem</td><td class="cv-val">{{vehicleMileage}} km</td></tr>
+      <tr><td class="cv-fl">Data da venda</td><td class="cv-val">{{saleDateShort}}</td></tr>
+    </table>
+
+    <div class="cv-section"><span class="cv-section-num">D</span> PREÇO E CONDIÇÕES DE VENDA</div>
+    <table class="cv-price jv-field-table">
+      <thead>
+        <tr>
+          <th>Tipo pagamento</th>
+          <th>Valor R$</th>
+          <th>Histórico</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>DINHEIRO</td>
+          <td>{{cashValue}}</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>FINANCIAMENTO</td>
+          <td>{{financingValue}}</td>
+          <td style="font-size: 8.5pt;">{{paymentMethod}}</td>
+        </tr>
+        <tr class="cv-total">
+          <td>TOTAL</td>
+          <td>{{totalValue}}</td>
+          <td style="font-weight: normal;">({{totalValueWords}})</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="cv-clauses">
+      <p><strong>1.</strong> Na hipótese de o <strong>COMPRADOR</strong> dar em troca veículo de menor valor, declara-se o único responsável, civil e criminalmente, por questões relacionadas a esse bem, isentando a <strong>VENDEDORA</strong>.</p>
+      <p><strong>2.</strong> O <strong>COMPRADOR</strong> declara ter vistoriado o veículo e aceitá-lo no estado em que se encontra (<em>ad corpus</em>), ciente de que é bem usado. A <strong>VENDEDORA</strong> não responde por divergência de hodômetro atribuível a proprietários anteriores.</p>
+      <p><strong>3.</strong> Taxa de transferência: <strong>R$ 1.500,00</strong>. Em financiamento, T.A.C. de até <strong>R$ 2.000,00</strong>, conforme instituição.</p>
+      <p><strong>4.</strong> A partir da assinatura e da entrega física ou documental do veículo, os riscos de perda, dano, furto, roubo, multas e encargos de circulação passam ao <strong>COMPRADOR</strong>, ainda que pendente a transferência perante o órgão de trânsito.</p>
+      <p><strong>5.</strong> O <strong>COMPRADOR</strong> obriga-se a providenciar a transferência do domínio no prazo legal, arcando com taxas, emolumentos e custas, salvo acordo escrito em contrário. O atraso não autoriza retenção de valores já quitados em favor da <strong>VENDEDORA</strong>, sem prejuízo de multas administrativas de sua exclusiva responsabilidade.</p>
+      <p><strong>6.</strong> O veículo é vendido na condição de <strong>usado</strong>; declarações verbais que não constem deste instrumento não vinculam a <strong>VENDEDORA</strong>.</p>
+      <p><strong>DAS CONDIÇÕES DA GARANTIA</strong> — prazo de <strong>{{warrantyDays}} dias</strong>, conforme cláusulas nas páginas seguintes.</p>
+    </div>
+  </section>
+
+  <div class="cv-print-only-break" aria-hidden="true"></div>
+
+  <!-- FOLHA 2 -->
+  <section class="cv-sheet">
+    <header class="cv-letterhead">
+      <img src="/logo-contrato.png" class="cv-brand-logo" alt="" style="height: 46px; width: auto; object-fit: contain; display: block; flex-shrink: 0;" />
+      <div class="cv-letterhead-meta">
+        <div>{{companyAddress}}</div>
+        <div>CNPJ: {{companyCnpj}}</div>
+        <div>Tel.: {{companyPhone}}</div>
+      </div>
+    </header>
+
+    <h2 class="cv-h2">GARANTIA</h2>
+
+    <p class="cv-block" style="margin-bottom: 12px;">
+      O <strong>COMPRADOR</strong> declara ciência de que a garantia da <strong>VENDEDORA</strong> é de <strong>{{warrantyDays}} dias</strong>, limitada ao <strong>MOTOR</strong> e à <strong>CAIXA DE CÂMBIO</strong>, nas condições abaixo:
+    </p>
+    <p class="cv-block" style="font-size: 9.75pt;"><strong>1.</strong> Aplica-se ao veículo identificado neste contrato.</p>
+    <p class="cv-block" style="font-size: 9.75pt;"><strong>2.</strong> Veículo usado: cobertura restrita a motor e câmbio; excluídos desgaste natural dos demais componentes.</p>
+    <p class="cv-block" style="font-size: 9.75pt;"><strong>3.</strong> Reparos em oficina autorizada, com orçamento prévio aprovado pela <strong>VENDEDORA</strong>.</p>
+    <p class="cv-block" style="font-size: 9.75pt;"><strong>4.</strong> Prazo contado da entrega, observada a legislação aplicável.</p>
+    <p class="cv-block" style="font-size: 9.75pt;"><strong>5.</strong> Autorização para conferência de quilometragem e indícios de fraude no hodômetro.</p>
+    <p class="cv-block" style="font-size: 9.75pt;"><strong>6.</strong> Peças substituídas poderão ser retidas pela <strong>VENDEDORA</strong>.</p>
+    <p class="cv-block" style="font-size: 9.75pt;"><strong>7.</strong> Substituição de motor/câmbio somente se comprovada impossibilidade técnica de reparo.</p>
+
+    <p class="cv-sub">São condições indispensáveis para a garantia:</p>
+    <p class="cv-block" style="font-size: 9.75pt;"><strong>8.1.</strong> Reclamações na sede da <strong>VENDEDORA</strong>, conforme este contrato.</p>
+    <p class="cv-block" style="font-size: 9.75pt;"><strong>8.2.</strong> Excluídos defeitos por desgaste anterior à venda; o <strong>COMPRADOR</strong> declara o veículo em condições de uso na compra.</p>
+    <p class="cv-block" style="font-size: 9.75pt;"><strong>8.3.</strong> Excluídos desuso prolongado, mau uso, acidente e força maior.</p>
+    <p class="cv-block" style="font-size: 9.75pt;"><strong>8.4.</strong> Observância do manual do fabricante.</p>
+
+    <p class="cv-sub">DA NÃO COBERTURA — G.1</p>
+    <p class="cv-g1">
+      Após a retirada, o <strong>COMPRADOR</strong> responde por multas, tributos e responsabilidades de trânsito. Não cobertos: anéis sincronizadores, discos e pastilhas, lonas, cabos, velas, bobinas, embreagem, volante do motor, bicos, bombas de combustível, injeção eletrônica, sensores, retentores, correias, rolamentos, bateria, alternador, partida, bronzinas, pistões, bombas d’água/óleo, radiador, termostato, limpadores, vidros elétricos, chicotes, módulos, amortecedores, molas, bandejas, direção, escapamento, estofamento, alinhamento, ar-condicionado (salvo expresso), e análogos. Excluídos ainda fluidos, lâmpadas, air bags, pintura, som não original, alarmes, GNV/GPS, pneus e acessórios; vazamentos e ruídos não caracterizados como falha de motor/câmbio, na análise da <strong>VENDEDORA</strong>.
+    </p>
+  </section>
+
+  <div class="cv-print-only-break" aria-hidden="true"></div>
+
+  <!-- FOLHA 3: cláusulas finais + assinaturas -->
+  <section class="cv-sheet">
+    <header class="cv-letterhead">
+      <img src="/logo-contrato.png" class="cv-brand-logo" alt="" style="height: 46px; width: auto; object-fit: contain; display: block; flex-shrink: 0;" />
+      <div class="cv-letterhead-meta" style="text-align: center; max-width: none; flex: 1;">
+        <div>{{companyAddress}}</div>
+        <div>CNPJ: {{companyCnpj}}</div>
+        <div>Tel.: {{companyPhone}}</div>
+      </div>
+    </header>
+
+    <p class="cv-block" style="font-size: 9.75pt;"><strong>G.2</strong> — Garantia restrita a motor e câmbio; excluídos transporte, guincho, hospedagem, imobilização, alterações em oficina não indicada pela <strong>{{companyName}}</strong>, mau uso ou falta de manutenção; sem garantia específica de pintura (vistoria reconhecida pelo <strong>COMPRADOR</strong>).</p>
+
+    <p class="cv-block" style="font-size: 9.75pt;"><strong>H</strong> — Multa de <strong>10%</strong> sobre o valor do contrato em caso de arrependimento ou rescisão culposa, a favor da parte inocente, com eficácia de título executivo.</p>
+
+    <p class="cv-sub">DISPOSIÇÕES FINAIS</p>
+    <p class="cv-block" style="font-size: 9.75pt;"><strong>1.</strong> Sinal: reserva por <strong>48 horas</strong> (ou prazo escrito); frustrado o negócio pelo <strong>COMPRADOR</strong>, retenção de <strong>100%</strong> do sinal.</p>
+    <p class="cv-block" style="font-size: 9.75pt;"><strong>2.</strong> Entrega futura: prorrogação de até <strong>20 dias úteis</strong> por força maior ou culpa de terceiros, fora da <strong>VENDEDORA</strong>.</p>
+    <p class="cv-block" style="font-size: 9.75pt;"><strong>3.</strong> Atraso por culpa do <strong>COMPRADOR</strong> (pagamento/documentos) sujeita às penalidades.</p>
+    <p class="cv-block" style="font-size: 9.75pt;"><strong>4.</strong> Com saldo em aberto, a <strong>VENDEDORA</strong> poderá <strong>REALIZAR COMUNICADO DE VENDA NO DETRAN EM NOME DA VENDEDORA</strong> até quitação integral.</p>
+
+    <p class="cv-block" style="font-size: 9.75pt;"><strong>M.1</strong> — Ciência do comunicado ao DETRAN e da troca de óleo/filtro antes de <strong>500 km</strong> com nota fiscal para manter a garantia.</p>
+
+    <p class="cv-sub">DA DOCUMENTAÇÃO, DÉBITOS E PROCURAÇÕES</p>
+    <p class="cv-block" style="font-size: 9.75pt;"><strong>J.1</strong> — A <strong>VENDEDORA</strong> declara, sob as penas da lei, não haver débitos de IPVA, licenciamento, multas e restrições judiciais ou administrativas não informadas ao <strong>COMPRADOR</strong> na data da assinatura, ressalvados débitos posteriores à transferência e os de responsabilidade do <strong>COMPRADOR</strong>.</p>
+    <p class="cv-block" style="font-size: 9.75pt;"><strong>J.2</strong> — O <strong>COMPRADOR</strong> autoriza a <strong>VENDEDORA</strong> a representá-lo perante repartições públicas exclusivamente para fins de transferência, mediante procuração específica quando exigida.</p>
+
+    <p class="cv-sub">DO FINANCIAMENTO E DA PROPRIEDADE RESOLÚVEL</p>
+    <p class="cv-block" style="font-size: 9.75pt;"><strong>K.1</strong> — Na hipótese de financiamento bancário ou crediário, a propriedade do veículo poderá permanecer alienada ou sujeita a cláusulas da instituição financeira até a quitação integral; o <strong>COMPRADOR</strong> declara ciência e anuência.</p>
+    <p class="cv-block" style="font-size: 9.75pt;"><strong>K.2</strong> — O inadimplemento de parcelas perante terceiros não exime o <strong>COMPRADOR</strong> das obrigações assumidas neste contrato perante a <strong>VENDEDORA</strong>, quando aplicável em garantias complementares.</p>
+
+    <p class="cv-sub">DAS DECLARAÇÕES, LGPD E CÓDIGO DE DEFESA DO CONSUMIDOR</p>
+    <p class="cv-block" style="font-size: 9.75pt;"><strong>L.1</strong> — As partes declaram que os dados pessoais tratados para execução deste contrato seguem a legislação aplicável (Lei nº 13.709/2018), podendo ser utilizados para cumprimento legal, cobrança e relacionamento contratual.</p>
+    <p class="cv-block" style="font-size: 9.75pt;"><strong>L.2</strong> — Tratando-se de relação de consumo, aplicam-se as disposições do Código de Defesa do Consumidor na forma da lei, sem prejuízo de cláusulas válidas pactuadas quanto a veículo usado, vistoria e garantia limitada expressamente neste instrumento.</p>
+
+    <p class="cv-sub">DA ELEIÇÃO DE FORO E DAS COMUNICAÇÕES</p>
+    <p class="cv-block" style="font-size: 9.75pt;"><strong>M.2</strong> — Fica eleito o foro da Comarca de <strong>{{forumFull}}</strong>, com renúncia de qualquer outro, por mais privilegiado que seja, para dirimir questões oriundas deste contrato, salvo competência absoluta de outro juízo.</p>
+    <p class="cv-block" style="font-size: 9.75pt;"><strong>M.3</strong> — Comunicações entre as partes poderão ocorrer pelos telefones e e-mails informados no preâmbulo ou cadastro, valendo como recebidas na data do envio com comprovação razoável.</p>
+
+    <p class="cv-block" style="margin-top: 16px;"><strong>Nome:</strong> {{clientName}} &nbsp;|&nbsp; <strong>CPF:</strong> {{clientCpf}}</p>
+    <p class="cv-block"><strong>Foro:</strong> Comarca de <strong>{{forumFull}}</strong>.</p>
+    <p class="cv-block"><strong>OBS:</strong> {{observations}}</p>
+    <p class="cv-footer-line">{{venueDateLine}}</p>
+
+    <div class="cv-signatures">
+      <div class="cv-sig-grid">
+        <div class="cv-sig-box">
+          <div class="cv-sig-line"></div>
+          <div class="cv-sig-name">{{clientName}}</div>
+          <div class="cv-sig-meta">CPF/CNPJ {{clientCpf}}</div>
+        </div>
+        <div class="cv-sig-box">
+          <div class="cv-sig-line"></div>
+          <div class="cv-sig-name">{{companyName}}</div>
+          <div class="cv-sig-meta">CNPJ {{companyCnpj}}</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
